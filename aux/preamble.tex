@@ -1,0 +1,35 @@
+\documentclass[listof=totoc,bibliography=totoc,11pt,twoside,BCOR=12mm,DIV=11]{scrbook}
+\linespread{1.25}
+
+%\usepackage{showframe}  %to show typing area, header, footer, margins
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{charter} %set font
+%\setkomafont{disposition}{\bfseries}
+\addtokomafont{chapter}{\Huge} %set font parameter
+\addtokomafont{section}{\huge} %set font parameter
+\addtokomafont{subsection}{\LARGE} %set font parameter
+\addtokomafont{subsubsection}{\Large} %set font parameter
+
+%\usepackage[headsepline,footsepline]{scrpage2}
+%\pagestyle{scrheadings}
+%\setheadsepline{3pt}
+
+%\usepackage[round,mcite]{natbib} %bibliography
+
+\usepackage[hidelinks]{hyperref} %hyperlinks in pdf
+
+\usepackage{blindtext}  %to create a dummy document
+\usepackage{lipsum} %content filler
+
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps} %images without extension
+\usepackage{subfig} %use subfigure configurations
+
+\usepackage{textcomp} %copyright symbols
+\usepackage[intoc]{nomencl}
+\makenomenclature

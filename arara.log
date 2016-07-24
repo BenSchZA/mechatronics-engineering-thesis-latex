@@ -1,0 +1,5 @@
+13 May 2016 14:31:37.871 INFO  Arara - Welcome to arara!
+13 May 2016 14:31:37.876 INFO  Arara - Processing file 'main.tex', please wait.
+13 May 2016 14:31:37.878 INFO  DirectiveExtractor - Reading directives from main.tex.
+13 May 2016 14:31:37.882 INFO  Arara - No directives found in 'main.tex'.
+13 May 2016 14:31:37.883 INFO  Arara - Done.

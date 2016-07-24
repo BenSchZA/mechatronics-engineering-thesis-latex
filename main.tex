@@ -1,0 +1,50 @@
+% Arara build configuration:
+% arara: pdflatex: { synctex: on }
+% arara: bibtex
+% arara: nomencl: {style: 'nomencl'}
+% arara: pdflatex: { synctex: on }
+% arara: pdflatex: { synctex: on }
+
+%\includeonly{titlepage, ch01}
+\input{aux/preamble.tex}
+
+\begin{document}
+
+\frontmatter
+\include{misc/titlepage}
+\include{misc/declaration}
+\include{misc/abstract}
+\include{misc/acknowledgements}
+\include{misc/termsofreference}
+
+\textsf{\tableofcontents}
+%\tableofcontents
+
+\listoffigures
+\listoftables
+
+\printnomenclature
+
+\mainmatter
+%ch01: Introduction
+%ch02: Literature Review
+%ch03: Project Plan and Methodology
+%ch04: Theory Development
+%ch05: System Modelling and Simulation
+%ch06: Conclusions
+%ch07: Recommendations and Future Work
+
+\include{chap/ch01}
+\include{chap/ch02}
+\include{chap/ch03}
+\include{chap/ch04}
+\include{chap/ch05}
+\include{chap/ch06}
+\include{chap/ch07}
+
+\include{misc/references}
+
+\appendix
+\include{app/ap01}
+
+\end{document}
