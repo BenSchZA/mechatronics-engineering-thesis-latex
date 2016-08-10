@@ -31,5 +31,14 @@
 \usepackage{subfig} %use subfigure configurations
 
 \usepackage{textcomp} %copyright symbols
+
+%Nomenclature
 \usepackage[intoc]{nomencl}
 \makenomenclature
+
+% customize dictum format:
+\setkomafont{dictumtext}{\itshape\small}
+\setkomafont{dictumauthor}{\normalfont}
+\renewcommand*\dictumwidth{\linewidth}
+\renewcommand*\dictumauthorformat[1]{--- #1}
+\renewcommand*\dictumrule{}
