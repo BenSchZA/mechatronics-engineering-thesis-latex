@@ -1,6 +1,11 @@
 \documentclass[listof=totoc,bibliography=totoc,11pt,twoside,BCOR=12mm,DIV=11]{scrbook}
 \linespread{1.25}
 
+\renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
+
+\renewcommand{\autodot}{}% Remove all end-of-counter dots
+\addtokomafont{pagenumber}{\large\sffamily}
+
 %\usepackage{showframe}  %to show typing area, header, footer, margins
 
 \usepackage{microtype} %improve font spacing
@@ -29,6 +34,7 @@
 \usepackage{blindtext}  %to create a dummy document
 \usepackage{lipsum} %content filler
 
+\usepackage{float}
 \usepackage{graphicx}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps} %images without extension
 \usepackage{subfig} %use subfigure configurations
