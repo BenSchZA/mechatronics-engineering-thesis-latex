@@ -1,11 +1,11 @@
 % Arara build configuration:
 % arara: pdflatex: { synctex: on }
-% arara: bibtex
-% arara: nomencl: {style: 'nomencl'}
-% arara: pdflatex: { synctex: on }
-% arara: pdflatex: { synctex: on }
+% bibtex
+% nomencl: {style: 'nomencl'}
+% pdflatex: { synctex: on }
+% pdflatex: { synctex: on }
 
-%\includeonly{titlepage, ch01}
+%\includeonly{chap/legdesign}
 \input{aux/preamble.tex}
 
 \begin{document}
@@ -23,7 +23,7 @@
 \listoffigures
 \listoftables
 
-\printnomenclature
+%\printnomenclature
 
 \mainmatter
 %ch01: Introduction
@@ -45,14 +45,16 @@ come to an end; then stop.''}\vskip1em}
 \include{chap/litreview}
 \include{chap/projplan}
 \include{chap/theorydev}
+\include{chap/modelling}
 \include{chap/legdesign}
 \include{chap/comms}
-\include{chap/modelling}
-\include{chap/trajectory}
+\include{chap/kinematics}
+\include{chap/dynamics}
+\include{chap/control}
 
 \setchapterpreamble[uc][.75\textwidth]{%
-\dictum[Van Hallen, \textit{1984}]{%
-''Jump!''}\vskip1em}
+\dictum[Van Halen, \textit{1984}]{%
+``Jump!''}\vskip1em}
 
 \include{chap/testing}
 \include{chap/validation}

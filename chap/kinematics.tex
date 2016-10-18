@@ -1,0 +1,40 @@
+\chapter{Kinematics}
+
+\begin{equation}
+f(\phi_1, \phi_2) = \left(\begin{array}{cc} \sqrt{\frac{9}{100} - \frac{9\, {\sin\!\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}^2}{400}} - \frac{3\, \cos\!\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{20} & \frac{\mathrm{\phi_1}}{2} - \frac{\mathrm{\phi_2}}{2} \end{array}\right)
+\end{equation}
+
+\begin{equation}
+g(r, \theta) = \left(\begin{array}{c} \pi - acos(\frac{r^2 + l_1^2 - l_2^2}{2rl_1}) + \theta \\
+\pi - acos(\frac{r^2 + l_1^2 - l_2^2}{2rl_1}) - \theta  \end{array}\right)
+\end{equation}
+
+%\begin{equation}
+%J^T =  \left(\begin{array}{cc} \frac{3 \sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{40} - \frac{9 \cos\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right) \sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{800 \sqrt{\frac{9}{100} - \frac{9 {\sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}^2}{400}}} & \frac{1}{2}\\ \frac{3 \sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{40} - \frac{9 \cos\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right) \sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{800 \sqrt{\frac{9}{100} - \frac{9 {\sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}^2}{400}}} & - \frac{1}{2} \end{array}\right)
+%\end{equation}
+
+Taking the Jacobian of the kinematic mapping $f(\phi_1, \phi_2)$ the foot force vector, F, can be transformed to the motor torque commands, $\tau$:
+\begin{equation}
+J = \left[ \frac{\partial \textbf{f}}{\partial \textbf{X}} \right] 
+\end{equation}
+where \textbf{X} = [r $\theta$].
+
+The following force vector provides a constant angular force, $f_{theta}$:
+\begin{equation}
+F = [f_r\ f_{\theta}]^T
+\end{equation}
+
+by using $f_{s}$, a force related to the arc-length of a polar system, the relation $s = r \theta$ exists:
+\begin{equation}
+F = [f_r\ f_{s}]^T
+\end{equation}
+
+
+
+\begin{equation}
+f_a = k_s(a_{fbk} - a_{cmd}) + k_d(\dot{a}_{fbk} - \dot{a}_{cmd})
+\end{equation}
+
+\begin{equation}
+\tau = J^TF
+\end{equation}
