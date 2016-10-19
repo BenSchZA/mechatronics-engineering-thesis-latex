@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n+nf}{BaseCommandCompile}\PYG{p}{(}\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{n}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{SeqBits}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{ComBits}\PYG{p}{,}
+\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{INDOFF1}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{INDOFF2}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{o}{*}\PYG{n}{DATA}\PYG{p}{,}
+\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{LEN}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{SNIP}\PYG{p}{);}
+\end{Verbatim}

@@ -1,4 +1,12 @@
 \chapter{Leg Design and Construction}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/mechanical/leg-mount} 
+\caption{Final leg design mounted to platform and linear guide.}
+\label{fig:Final leg design}
+\end{figure}
+
 \section{Geometry}
 
 \begin{figure}[H]
@@ -11,23 +19,31 @@
 \section{Mechanics and Construction}
 
 \subsection{Alumnium Mounting Plate Design}
+
 \begin{figure}
 \centering
 \subfloat[][CAD mounting plate V1.]{
-\includegraphics[clip, trim=2cm 0cm 16cm 1cm, page = 1, width=0.5\textwidth]{images/mechanical/laser-test-print-V1} 
+\includegraphics[clip, trim=2cm 0cm 16cm 1cm, page = 1, width=0.3\textwidth]{images/mechanical/laser-test-print-V1} 
 \label{fig:CAD mounting plate V1}
 }
 \subfloat[][CAD mounting plate V3.1.3.]{
-\includegraphics[clip, trim=5cm 10cm 14cm 2cm, page = 1, width=0.5\textwidth]{images/mechanical/laser-test-print-V313} 
+\includegraphics[clip, trim=5cm 10cm 14cm 2cm, page = 1, width=0.3\textwidth]{images/mechanical/laser-test-print-V313} 
 \label{fig:CAD mounting plate V3.1.3}
 }
 
 \subfloat[][CAD mounting plate final design.]{
-\includegraphics[clip, trim=0cm 21cm 9cm 0cm, page = 1, width=1\textwidth]{images/mechanical/main-plate-final} 
+\includegraphics[clip, trim=0cm 21cm 9cm 0cm, page = 1, width=0.6\textwidth]{images/mechanical/main-plate-final} 
 \label{fig:CAD mounting plate final design.}
 }
 \caption{Leg mounting plate iterations.}
 \label{fig:Leg mounting plate iterations.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{images/mechanical/driver-mount-plate.pdf} 
+\caption{Motor driver interface mounting plate.}
+\label{fig:Motor driver interface mounting plate}
 \end{figure}
 
 \subsection{Linear Guide}
@@ -46,8 +62,6 @@
 \label{fig:Linear guide mounted leg model}
 \end{figure}
 
-
-
 \section{Electronics and Communication}
 \subsection{Accelerometer and Gyroscope}
 \subsection{Distance Sensor}
@@ -56,20 +70,173 @@
 \subsection{Shielding}
 \section{Motors and Drivers}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.6\textwidth]{images/driver/driver.jpg} 
-\caption{AMC DigiFlex Performance Servo Drive.}
-\label{fig:AMC Servo Drive}
-\end{figure}
+\subsection{Driver Selection}
 
 \begin{figure}
 \centering
-\includegraphics[width=0.6\textwidth]{images/driver/mounting-card.jpg} 
-\caption{AMC DigiFlex Performance Servo Drive mounting card.}
-\label{fig:AMC Servo Drive Mounting Card}
+\subfloat[][AMC DigiFlex Performance Servo Drive.]{
+\includegraphics[width=0.5\textwidth]{images/driver/driver.jpg} 
+}
+\subfloat[][AMC DigiFlex Performance Servo Drive mounting card.]{
+\includegraphics[width=0.5\textwidth]{images/driver/mounting-card.jpg}
+} 
+\caption{AMC Servo Drive and Mounting Card.}
+\label{fig:AMC Servo Drive and Mounting Card}
 \end{figure}
+
+\subsection{Motor Selection}
+
+\begin{figure}
+\centering
+\includegraphics[clip, trim=0cm 5cm 0cm 2cm, width=0.4\textwidth]{images/motor/TMotorU10Plus} 
+\caption{T-Motor U10 Plus Brushless DC Motor.}
+\label{fig:TMotorU10Plus}
+\end{figure}
+
+\subsection{Motor Model Calculations}
+
+\subsubsection{Experimental Calculation of $K_t$ and $K_e$}
+The motor torque constant, $K_t$, was calculated using the torque current relation $\tau = K_tI$. The leg was modelled as a virtual spring-damper system, as seen in \cref{fig:Leg spring-damper virtual model}. 
+
+The spring constant, $K_{s1}$, was set to $200\ [N/m]$, and the damping and torsional spring-damping constants were set to zero. $K_t$ was tuned until the theoretical foot force matched the practical foot force measured via a scale. The leg was fixed at a set height imposing a radial offset on the virtual spring-damper system.
+
+For a spring constant of $200\ [N/m]$ and a radial offset of $0.15\ m$ a theoretical foot force of $K_{s1}\Delta r = 30\ N$ was expected. A mass of approximately $3\ kg$ was measured with $K_t = 0.08\ [Nm/A]$ set in the virtual leg model controller, resulting in a foot force of $3\ kg \times 9.81\ m/s^2 = 29.43\ [N]$. 
+
+The study in \cite{Kalouche2016}, using the same T-Motor U10 Plus motors, calculated a torque constant of $K_t =  0.072\ [Nm/A]$. This confirms the experimental results obtained above.
+
+For an ideal motor at a constant operating point, $K_e$ will equal $K_t$, as shown in \cref{eqn:ktke}.
+
+\begin{equation} \label{eqn:ktke}
+\begin{aligned}
+&V_t = K_e\omega_m + IR_m \\
+&\tau_m = K_t I \\
+&P_{elec.} = V_t I = K_e \omega_m I + I^2 R \\ 
+&P_{mech.} = \tau_m \omega_m = K_t I \omega_m \\
+&P_{loss.} = I^2 R_m \\
+&P_{elec.} = P_{mech.} + P_{loss.} \\
+&\therefore K_e\ [V/rad/s]= K_t\ [Nm/A] = 0.08
+\end{aligned} 
+\end{equation}
+
+\subsubsection{Calculation of $R_m$ and $L_m$}
+The resistance and inductance of the 3 phase windings of the motor were calculated using a lab multimeter to be $R_m = 47.5\ m\Omega$ and $L_m = 35\ \mu H$ respectively. 
+
+Brushless DC motor windings are usually connected in WYE formation, as seen in \cref{bldc-wye-connection}. This means the measured values for resistance and inductance were line-to-line values and had to be divided by two to get the per phase values above.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth]{images/motor/wye.jpg} 
+\caption{WYE connected BLDC motor windings.}
+\label{fig:bldc-wye-connection}
+\end{figure}
+
+\subsubsection{Calculation of $J_m$}
+In order to calculate the moment of inertia of the motor, $J_m$, the ratio of acceleration torque to acceleration to steady state needs to be found. By commanding a DC equivalent current input of $1\ A$ and measuring the time taken to reach a steady state velocity, \cref{eqn:Jm} can be used to calculate $J_m$. The velocity vs. time plot used can be seen in \cref{fig:jm-plots}.
+
+\begin{equation} \label{eqn:Jm}
+\begin{aligned}
+J_m &= \frac{T_{acc.}[N/m]}{a[m/s^2]} \\
+&= \frac{IK_t}{a} \\
+&= \frac{IK_t}{\frac{\Delta v}{\Delta t}}\ [kg/m^2]
+\end{aligned}
+\end{equation}
+
+where $I=1\ A$, $K_t=0.08\ Nm/A$, $\Delta v = 1313.906\times \frac{2\pi}{60}\ rad/s$ and $\Delta t = 588.889\times10^{-3}\ s$.
+
+This results in a motor moment of inertia of $J_m = 3.424 \times 10^{-4}\ [kg/m^2]$.
+
+\subsubsection{Calculation of $B_m$}
+
+The motor damping or viscous friction, $B_m$, was assumed to be negligible. Brushless DC motors have near zero damping and will have little effect on the simulated motor model.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{images/driveware/current-velocity-response} 
+\caption{Velocity vs. time plot for 1A equivalent DC command.\\
+(500 rpm; 500 ms/div)}
+\label{fig:jm-plots}
+\end{figure}
+
+\subsubsection{Calculation of $\tau_e$ and $\tau_m$}
+The electrical and mechanical time constants of the motor, $\tau_e$ and $\tau_m$ respectively, can be used to plot a root-locus plot with poles at $-\tau_e$ and $-\tau_m$ as can be seen in \cref{...}. This is useful when designing a current controller for the system. $\tau_e$ and $\tau_m$ can be calculated using \cref{eqn:motor-time-constants}.
+
+\begin{equation} \label{eqn:motor-time-constants}
+\begin{aligned}
+&K_m = \frac{1}{B_m} \\
+&\tau_m = \frac{J_m}{B_m} \\
+&K_e = \frac{1}{R_m} \\
+&\tau_e = \frac{L_m}{R_m} 
+\end{aligned}
+\end{equation}
+
+From \cref{eqn:motor-time-constants} and using the previously calculated motor constants, $\tau_e = 7.368 \times 10^{-4}$ and $\tau_m = 3.424 \times 10^{-4}$. This is assuming a motor viscous friction of $B_m = 0$.
+
+The resulting motor model open loop root-locus plot can be seen in \cref{fig:ol-motor-rlocus}. As expected the system has only negative real roots and will be stable in open loop.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{images/motor/ol-motor-rlocus} 
+\caption{Motor model open loop root-locus plot.}
+\label{fig:ol-motor-rlocus}
+\end{figure}
+
 
 \subsection{Driver Configuration}
+
+The AMC drivers allow extensive customisation. After the motor, encoder, and general communication control parameters are configured, the PID control loops of the drivers can be configured, as seen in \cref{fig:AMCControlLoops}.
+
+The motor drivers were initially configured with both on-board PID current and position control loops enabled. This allowed initial modelling of the motors, configuring of the motor encoders, and determining of the position limits (in counts). For control of the leg, the position control loop was finally implemented on the STM32F4 microcontroller, while using the existing current control loop of the motor drivers.
+
+The AMC drivers were configured using the AMC Driveware configuration software, which provided an oscilloscope to measure the relevant motor responses as seen in \cref{fig:jm-plots,,fig:current-tuning-plots,,fig:position-tuning-plots}.
+
+\begin{figure}
+\centering
+\includegraphics[clip, trim=2cm 5cm 2cm 8cm, page = 114, width=1\textwidth]{pdfs/AMC_DriveWareSoftwareManual.pdf} 
+\caption{AMC DigiFlex Performance Servo Drive control loops (AMC, 2014).}
+\label{fig:AMCControlLoops}
+\end{figure}
+
+\subsubsection{Current Control Loop}
+
+By using a 1 A 120Hz square wave current command the current PI control loop was tuned, as seen in \cref{fig:current-tuning-plots}. Initially both  the proportional gain, $K_p$, and the integral gain, $K_i$, were set to zero. $K_p$ was slowly increased until the final amplitude of the current output just started to overshoot. $K_i$ was then set to minimize the steady state error. 
+
+Values of $K_p = 0.277$ and $K_i = 0.262$ were obtained. Both motors were found to operate optimally with the same PI gain values.
+
+\begin{figure}
+\centering
+\subfloat[][Motor driver current loop pre-tuning.\\ 
+(200 mA; 5 ms/div)]{
+\includegraphics[width=0.5\textwidth]{images/driveware/current-pre-tuning-plot.png} 
+}
+\subfloat[][Motor driver current loop tuning - 1A 120Hz square wave command.\\(1 A; 1 ms/div)]{
+\includegraphics[width=0.5\textwidth]{images/driveware/current-tuning-plot.png} 
+}
+\caption{Motor driver current loop tuning plots.}
+\label{fig:current-tuning-plots}
+\end{figure}
+
+\subsubsection{Position Control Loop}
+The on-board AMC motor driver control loop was set up to test the encoder configuration. The encoder and relevant position limits can be seen in \cref{sec:motor-encoders}. 
+
+A 1Hz sinusoid was used to tune the PID control loop gains. Values of $K_p = 0.0005793$, $K_i = 0.0006052$ and $K_d = 2.769e-9$ were found to achieve optimal set-point tracking as seen in \cref{fig:position-tuning-plots}. The sinusoidal set-point can be seen in white and the position feedback in yellow. A 10-30 ms lag time can be seen due to the inertial load. This lag time causes a dead-band which should be considered when implementing a controller. 
+
+These tests were performed with the leg attached - the inertial load provided by the leg made PID control loop tuning possible, whereas without any inertial load the BLDC motors overshot their set-point.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{images/driveware/position-tuning-plot} 
+\caption{Motor driver position loop tuning - (-350:200) count 1Hz sinusoid command with 300 count offset.\\(100 ct; 100 ms/div)}
+\label{fig:position-tuning-plots}
+\end{figure}
+
 \subsection{Motor Encoders}
+\label{sec:motor-encoders}
+
+\begin{figure}
+\centering
+\includegraphics[clip, trim = 6cm 1cm 3cm 1cm, width=0.4\textwidth]{images/mechanical/encoder-shaft} 
+\caption{3D printed PLA motor encoder shaft.}
+\label{fig:encoder-shaft}
+\end{figure} 
+
 \subsection{Tuning and Optimisation}

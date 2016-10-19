@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct} \PYG{n+nf}{\PYGZus{}\PYGZus{}attribute\PYGZus{}\PYGZus{}}\PYG{p}{((}\PYG{n}{\PYGZus{}\PYGZus{}packed\PYGZus{}\PYGZus{}}\PYG{p}{))} \PYG{n}{RXPacketStruct} \PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{START}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{];}
+	\PYG{p}{...}
+	\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n+nl}{StatBIT\PYGZus{}1} \PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{c+c1}{//Bit field}
+	\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n+nl}{StatBIT\PYGZus{}2} \PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{;}
+	\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n+nl}{StatBIT\PYGZus{}3} \PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{;}
+	\PYG{p}{...}
+	\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{CRCCheck}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{];} \PYG{c+c1}{//CRC\PYGZhy{}CCITT}
+	\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{STOP}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{];}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

@@ -1,5 +1,5 @@
 % Arara build configuration:
-% arara: pdflatex: { synctex: on }
+% arara: pdflatex: {synctex: on, shell: true}
 % bibtex
 % nomencl: {style: 'nomencl'}
 % pdflatex: { synctex: on }
@@ -22,6 +22,8 @@
 
 \listoffigures
 \listoftables
+\renewcommand\listoflistingscaption{List of Source Codes}
+\listoflistings
 
 %\printnomenclature
 
@@ -47,6 +49,7 @@ come to an end; then stop.''}\vskip1em}
 \include{chap/theorydev}
 \include{chap/modelling}
 \include{chap/legdesign}
+\definecolor{smokyblack}{rgb}{0.06, 0.05, 0.03}
 \include{chap/comms}
 \include{chap/kinematics}
 \include{chap/dynamics}

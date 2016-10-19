@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{HAL\PYGZus{}UART\PYGZus{}Receive\PYGZus{}DMA}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{PC\PYGZus{}UART}\PYG{p}{,} \PYG{n}{RXBufPC}\PYG{p}{,} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{RXPacket}\PYG{p}{));}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{xSemaphoreTake}\PYG{p}{(} \PYG{n}{PCRXHandle}\PYG{p}{,} \PYG{n}{portMAX\PYGZus{}DELAY} \PYG{p}{)} \PYG{o}{==} \PYG{n}{pdTRUE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+	\PYG{n}{rcvdCount} \PYG{o}{=} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{RXPacket}\PYG{p}{);}
+	\PYG{n}{START\PYGZus{}INDEX} \PYG{o}{=} \PYG{n}{findBytes}\PYG{p}{(}\PYG{n}{RXBufPC}\PYG{p}{,} \PYG{n}{rcvdCount}\PYG{p}{,}
+	\PYG{n}{RXPacket}\PYG{p}{.}\PYG{n}{START}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+	\PYG{k}{if}\PYG{p}{(}\PYG{n}{START\PYGZus{}INDEX}\PYG{o}{\PYGZgt{}=}\PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{n}{memcpy}\PYG{p}{(}\PYG{n}{RXPacketPTR}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{RXBufPC}\PYG{p}{[}\PYG{n}{START\PYGZus{}INDEX}\PYG{p}{],}
+		\PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{RXPacket}\PYG{p}{));}
+		\PYG{n}{RX\PYGZus{}DATA\PYGZus{}VALID} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+		\PYG{n}{WORDtoBYTE}\PYG{p}{.}\PYG{n}{BYTE}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{RXPacket}\PYG{p}{.}\PYG{n}{CRCCheck}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{];}
+		\PYG{n}{WORDtoBYTE}\PYG{p}{.}\PYG{n}{BYTE}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{RXPacket}\PYG{p}{.}\PYG{n}{CRCCheck}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{];}
+		\PYG{n}{CALC\PYGZus{}CRC} \PYG{o}{=} \PYG{n}{crcCalc}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{RXPacket}\PYG{p}{.}\PYG{n}{OPCODE}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{PAYLOAD\PYGZus{}RX}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{);}
+
+		\PYG{c+c1}{//A useful tool when calculating and}
+		\PYG{c+c1}{//confirming CRC values of various types:}
+		\PYG{c+c1}{//https://www.lammertbies.nl/comm/info/crc\PYGZhy{}}
+		\PYG{c+c1}{//calculation.html}
+
+		\PYG{k}{if}\PYG{p}{(}\PYG{n}{WORDtoBYTE}\PYG{p}{.}\PYG{n}{HALFWORD}\PYG{o}{==}\PYG{n}{CALC\PYGZus{}CRC}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+			\PYG{n}{RX\PYGZus{}DATA\PYGZus{}VALID} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+			\PYG{p}{...} \PYG{c+c1}{//Packet processing}
+\end{Verbatim}

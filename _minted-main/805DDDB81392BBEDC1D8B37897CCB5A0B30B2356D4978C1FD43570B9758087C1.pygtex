@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{union} \PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{WORD}\PYG{p}{;}
+	\PYG{k+kt}{uint16\PYGZus{}t} \PYG{n}{HALFWORD}\PYG{p}{;}
+	\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{BYTE}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{];}
+\PYG{p}{\PYGZcb{}} \PYG{n}{WORDtoBYTE}\PYG{p}{;}
+\end{Verbatim}
