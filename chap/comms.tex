@@ -1,97 +1,34 @@
 \chapter{Communication Protocol}
 
-Included pieces of code that may not be obvious to users or code that was particularly important to the operation of the protocol ...
+\section{FreeRTOS}
 
-%\inputminted{octave}{BitXorMatrix.m}
+Ideally FreeRTOS tasks should operate with as much isolation as possible, with each task performing a specific function with different priority levels. In the case of a communication protocol, the overall task is inherently sequential so this leads to FreeRTOS being used in a sequential way with all tasks operating at real-time priority level. 
 
-\begin{listing}[ht]
-\begin{minted}[
-linenos,
-bgcolor=smokyblack]{c}
-struct __attribute__((__packed__)) RXPacketStruct {
-	uint8_t START[2];
-	...
-	uint8_t StatBIT_1 : 1; //Bit field
-	uint8_t StatBIT_2 : 1;
-	uint8_t StatBIT_3 : 1;
-	...
-	uint8_t CRCCheck[2]; //CRC-CCITT        
-	uint8_t STOP[2];
-};
-\end{minted}
-\caption{PC RX "packed" packet structure.}
-\label{listing:packet-packet}
-\end{listing}
+FreeRTOS was chosen because of the following benefits:
 
-\begin{listing}[ht]
-\begin{minted}[
-linenos,
-bgcolor=smokyblack]{c}
-union {
-	uint32_t WORD;
-	uint16_t HALFWORD;
-	uint8_t BYTE[4];
-} WORDtoBYTE;
-\end{minted}
-\caption{Byte conversion union.}
-\label{listing:Byte conversion union}
-\end{listing}
+\begin{enumerate}
+\item Segmentation of code into specific tasks provides readable code for future users.
+\item FreeRTOS task configuration provides a framework for future embedded robotic control systems as well as easily reconfigurable code.
+\item Semaphores and queues lend themselves to sequential reception and processing of packets at predefined intervals very well.
+\item Isolation of tasks provides easy debugging of communication issues.
+\end{enumerate}
 
-\begin{listing}[ht]
-\begin{minted}[
-linenos,
-bgcolor=smokyblack]{c}
-HAL_UART_Receive_DMA(&PC_UART, RXBufPC, sizeof(RXPacket));
-if(xSemaphoreTake( PCRXHandle, portMAX_DELAY ) == pdTRUE) {
-	rcvdCount = sizeof(RXPacket);
-	START_INDEX = findBytes(RXBufPC, rcvdCount, 
-	RXPacket.START, 2, 1);
-	if(START_INDEX>=0) {
-		memcpy(RXPacketPTR, &RXBufPC[START_INDEX], 		
-		sizeof(RXPacket));
-		RX_DATA_VALID = 0;
+\subsection{Heartbeat Task}
+\subsection{PC TX Task}
+\subsection{PC RX Task}
+\subsection{TX Motor Task}
+\subsection{RX Motor Task}
+\subsection{Controller Task}
 
-		WORDtoBYTE.BYTE[1] = RXPacket.CRCCheck[0];
-		WORDtoBYTE.BYTE[0] = RXPacket.CRCCheck[1];
-		CALC_CRC = crcCalc(&RXPacket.OPCODE, 0, PAYLOAD_RX, 0);
-		
-		//A useful tool when calculating and 
-		//confirming CRC values of various types: 
-		//https://www.lammertbies.nl/comm/info/crc-		
-		//calculation.html
+\subsection{FreeRTOS Timing}
 
-		if(WORDtoBYTE.HALFWORD==CALC_CRC) {
-			RX_DATA_VALID = 1;
-			... //Packet processing
-\end{minted}
-\caption{PC RX packet processing.}
-\label{listing:PC RX packet processing}
-\end{listing}
+The default 1000 Hz tick rate was overridden with a tick rate of 5000 Hz to enable more fine tuned packet timing and delays. The timing configuration can be seen in \cref{listing:FreeRTOS timing}. 
 
-\begin{listing}[ht]
-\begin{minted}[
-linenos,
-bgcolor=smokyblack]{c}
-void BaseCommandCompile(uint8_t n, uint8_t SeqBits, uint8_t ComBits, 
-uint8_t INDOFF1, uint8_t INDOFF2, uint8_t *DATA, 
-uint8_t LEN, uint8_t SNIP);
-\end{minted}
-\caption{Motor packet compilation function.}
-\label{listing:Motor packet compilation function}
-\end{listing}
+In order to achieve a control loop rate of 200 Hz, a sampling time of 5 ms or 25 ticks was used.
 
-\begin{listing}[ht]
-\begin{minted}[
-linenos,
-bgcolor=smokyblack]{c}
-BaseCommandPTR = &BaseCommand[RXPacket.OPCODE];
-BaseCommandCompile(RXPacket.OPCODE, 0b0011, 0x02, 0x45, 0x02,
-RXPacket.M1C, 2, 0);
-xQueueOverwrite(ICommandM1QHandle, &BaseCommandPTR);
-\end{minted}
-\caption{Motor packet compilation current command example.}
-\label{listing:Motor packet compilation example}
-\end{listing}
+\section{Packet Encoding and Decoding}
+
+SeqBits bits 2-5 switch case
 
 \begin{figure}
 \centering

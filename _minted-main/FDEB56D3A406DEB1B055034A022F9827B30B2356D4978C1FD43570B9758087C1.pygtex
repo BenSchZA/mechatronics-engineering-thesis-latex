@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{//Communication Timing}
+\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{Ts} \PYG{o}{=} \PYG{l+m+mi}{25}\PYG{p}{;} \PYG{c+c1}{//Sampling time in 1/\PYGZus{}X\PYGZus{} ms}
+\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{Td} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{c+c1}{//NB: \PYGZsh{}define configTICK\PYGZus{}RATE\PYGZus{}HZ ((TickType\PYGZus{}t)\PYGZus{}X\PYGZus{}000) in FreeRTOSConfig.h}
+\end{Verbatim}
