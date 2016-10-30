@@ -4,9 +4,60 @@
 With a hop, skip, and a jump -- the journey begins!
 
 \section{Background}
+Baleka is one small step in a greater project - the UCT Mechatronics Lab Cheetah project. The leg linkage system was initially designed and built in the mechatronics lab. After completion of the undergraduate thesis project the robotic leg will be further developed by postgraduate researchers in the laboratory, using the same geometric leg configuration. 
+
+Baleka will be used to investigate modelling and control of rapid accelerations, with a preliminary controller developed to perform stable consecutive hopping with the robot.
+
 \section{Objectives of the Study}
 \subsection{Problems to be Investigated}
+\begin{itemize}
+\item High speed embedded system communication and packet processing.
+\item Virtual model control for accurate end effector force output. 
+\item Effective high speed kinematic control.
+\item Effective use of motor drivers to achieve rapid accelerations with a direct drive BLDC motor.
+\end{itemize}
+
 \subsection{Research Questions}
+\begin{itemize}
+\item Without an accurate dynamic model of a robotic platform is effective force control using a virtual model achievable?
+\item Is high fidelity foot force control using a simple Jacobian kinematic force mapping achievable?
+\item What control sampling frequency is necessary to achieve high fidelity force control? 
+\item Can a compliance model effectively absorb high speed impacts and effect rapid acceleration jumps?
+\end{itemize}
+
 \subsection{Purpose of the Study}
+The purpose of this study is to develop a robotic leg platform and testing rig capable of rapid acceleration and high fidelity force control experimentation.
+
 \section{Scope and Limitations}
+The scope of this project covers:
+\begin{itemize}
+\item Development of a mechanical robotic leg platform using available resources.
+\item Development of a control system capable of high fidelity force control for rapid acceleration hopping.
+\item Development of a GUI for robot configuration, data logging and live plotting.
+\item Development of basic robotic models.
+\item Effective configuration of motor drivers based on motor model.
+\end{itemize}
+
+The limitations of this project include:
+\begin{itemize}
+\item Motor drivers with communication speeds that limit the control sampling frequency to $200\ Hz$.
+\item Motor drivers that are limited to $60 A$ peak output current.
+\item Limited budget for extended mechanical development.
+\end{itemize}
+
 \section{Plan of Development}
+This study will initially investigate the current state of the art based on pre-existing legged robotic platforms and control techniques applicable to this project. 
+
+The project plan and methodology followed by theory development will develop an outline of the structure of the investigation and scientific method.
+
+System modelling and simulation will be performed on a higher level covering motor dynamics, current control and basic kinematics.
+
+The mechanical and electrical construction and design of the leg will be covered extensively followed by the development of the communication protocol and graphic user interface. 
+
+The leg kinematics and dynamic model will be investigated before the controller development is considered.
+
+Experimental testing will be performed in the following section which will include spring-damper tests, drop tests and hopping tests.
+
+The final design and implementation of the robot will be critically validated before the study ends with conclusions  and recommendation for future work based on the initial objectives of the study.
+
+In the appendix code listings and other miscellaneous material will be included for extended study.

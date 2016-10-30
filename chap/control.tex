@@ -2,16 +2,51 @@
 
 \section{Active Compliance}
 Active vs. Passive Compliance
+Passive compliance consists of using mechanical spring-damper components to adjust the dynamics of a robotics end effector. These come in the form of torsional springs, linear springs, hydraulic and pneumatic dampers to name a few. 
+
+In the study by G.A. Pratt and M.M. Williamson  passive compliance in the form of a Series Elastic Actuator (SEA) was said to provide shock tolerance, lower reflected 
+inertia, more accurate and stable force control, less damage to the environment, and the capacity for energy storage.\cite{Pratt1995}
+
+Active compliance (AC) in robotic platforms is a relatively new area of research. Active compliance was chosen instead of passive compliance (PC) for the following reasons:
+
+\begin{enumerate}
+\item AC is mechanically simpler.
+\item AC is mechanically lighter.
+\item Good PC is expensive to implement due to lack of application specific off-the-shelf parts.
+\end{enumerate}
+
+Most importantly, AC can be configured on the fly to adapt to the environment of the robot. This allows a robot to, much like their biological equivalents, to comply to the environment based on various sensory inputs, or to perform various acrobatic tasks making use of spring-damper compression and decompression.
+
+Various combinations of AC spring-damper configurations were designed, implemented and tested in order to determine the best topology.
+
 \section{Dynamic Stability}
-Static vs. Dynamic Stability
+Stand still, look around, turn around - these apparently simple tasks are composed of a network of biologically advanced sensors and muscular motor movements that seem intuitive. To do the same relatively static and stable movement with a physically free robot is complex. 
+
+The alternative to static stability is dynamic stability. Much like a spinning top remains stable due to gyroscopic effects when a stationary top topples over; a dynamically hopping leg remains upright with a relatively simple control system compared to a leg trying to remain upright and walk forward.
+
+In the book by  M.H. Raibert et al., \textit{Legged Robots That Balance}, an easily adaptable simple control algorithm for dynamic legged hopping was published. ...
 
 \section{Mechanical Impedance}
-Inherent mechanical impedance in the form of friction, slack, inertia, mass.
+The leg design has inherent mechanical impedance in the form of friction, slack and inertial mass. Without mechanical impedance the leg would continue acting like an ideal system when actuated. This can be seen in \cref{sec:Virtual Spring-damper Tests} where the leg is modelled as a spring-damper - the amplitude of the oscillation of the virtual spring model with spring constant $K_s = 100$ decays with time. 
+
+This mechanical impedance is not easily accounted for in the dynamic model of the leg as it is highly non-linear in the case of a complex linkage system as used in the Baleka leg - this makes it difficult to control. The mechanical impedance was treated as a disturbance and in the case of dynamic movement of the leg it was ignored. Energy will be lost in the hopping motion and during leg movement, but this is insignificant and only noticeable when doing spring-damper tests as seen in \cref{fig:spring-damper-tests}.
 
 \section{Control Loop Sampling Frequency}
 
-Limited by motor driver response time...
+For high bandwidth proprioceptive force control S. Kalouche showed that the control loop sampling frequency should ideally be in the $kHz$ scale.\cite{Kalouche2016} This allows the foot force to ideally match the expected foot force when performing high frequency dynamic movements. 
 
+The control loop sampling frequency was practically limited by the motor driver response time as seen in \cref{fig:packet-timing}. For every packet sent to the motor driver a response is required before the next packet can be sent otherwise the driver system becomes unstable. A maximum stable sampling frequency of $200 Hz$ was achieved with room for packet decoding, processing and controller action.
+
+\section{Force Control}
+
+\begin{equation}
+\tau = J^TF
+\end{equation}
+
+\subsection{Current Control}
+
+
+\section{Control Loop Design}
 \Cref{fig:virtual-model-impedance-loop} is an adaptation of the control loop design found in \cite{Kalouche2016}. Continuous position loop gain scheduling vs virtual spring-damper gain scheduling.
 
 \begin{figure}
@@ -21,6 +56,11 @@ Limited by motor driver response time...
 \label{fig:virtual-model-impedance-loop}
 \end{figure}
 
-\section{Current Control for Impulse Launch}
+\subsection{Current Control for Impulse Launch}
 
 Current saturation at 60A.
+
+\subsection{Torsional Spring-damper}
+$s = r \theta$\\
+
+\subsection{Full-leg vs. Joint Active Compliance}

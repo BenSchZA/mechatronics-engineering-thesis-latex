@@ -14,8 +14,24 @@ FreeRTOS was chosen because of the following benefits:
 \end{enumerate}
 
 \subsection{Heartbeat Task}
+The \textit{Heartbeat} task's primary function is to synchronise the communication protocol. It is the only task running with a 5 ms non-blocking delay. Every 5 ms it completes the following functions:
+
+\begin{enumerate}
+\item Compiles a read command packet for current, position and velocity.
+\item Appends these three packets to the two motor driver transmit queues. 
+\item Gives a binary semaphore to the motor 1 and motor 2 transmit tasks.
+\item Starts a 5 ms non-blocking delay to allow the two motor transmit tasks to complete their transmission and for the motor driver replies to be received and decoded.
+\item Gives a binary semaphore to the PC transmit task to compile and send the newly received motor data for logging.
+\end{enumerate}
+
 \subsection{PC TX Task}
+The \textit{TXPC} task is used purely for logging of data over serial on the Baleka C++ application, as seen in \cref{chap:Graphic User Interface}. 
+
+Data is received in a queue from both the motor \textit{RXMotor1} and \textit{RXMotor2} tasks as well as the \textit{Controller} task which is compiled into a packet along with status bits indicating various events and conditions. 
+
 \subsection{PC RX Task}
+The \textit{PCRX} task is the only task that is required to do non-synchronous reception of packets. The DMA reception is initialised and then the task waits until the full packet has been received before the RX complete interrupt handler gives the \textit{PCRX} task a semaphore to continue decoding of the data.
+
 \subsection{TX Motor Task}
 \subsection{RX Motor Task}
 \subsection{Controller Task}
@@ -26,9 +42,32 @@ The default 1000 Hz tick rate was overridden with a tick rate of 5000 Hz to enab
 
 In order to achieve a control loop rate of 200 Hz, a sampling time of 5 ms or 25 ticks was used.
 
-\section{Packet Encoding and Decoding}
+\section{Packet Transmission}
+\subsection{Integrity Checking}
+CRC ...
 
+\subsection{Structuring}
+packed struct...
+
+\subsection{Encoding and Decoding}
+\subsubsection{PC Packet}
+\subsubsection{Motor Driver Packet}
 SeqBits bits 2-5 switch case
+
+
+\section{Peripheral Configuration}
+
+\begin{figure}
+\centering
+\includegraphics[clip, trim=1cm 7cm 1cm 7cm, page = 2, width=0.8\textwidth]{pdfs/BalekaSTMConfig.pdf} 
+\caption{STM32F4 microcontroller peripheral configuration.}
+\label{fig:microcontroller-peripheral-config}
+\end{figure}
+
+\subsection{Protocol}
+\subsection{Data Rates}
+\subsection{Direct Memory Access}
+
 
 \begin{figure}
 \centering
@@ -41,7 +80,7 @@ SeqBits bits 2-5 switch case
 \centering
 \includegraphics[width=1\textwidth]{images/comms/pc-packet-timing-data} 
 \caption{Communication protocol packet timing with 5 ms sampling rate.}
-\label{fig:packet-timing.}
+\label{fig:packet-timing}
 \end{figure}
 
 \begin{table}

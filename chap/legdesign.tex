@@ -108,7 +108,9 @@ The 4-bar linkage design of the leg was originally constructed by Ben Bingham in
 
 
 
-\subsection{Linear Guide}
+\subsection{Testing Platform}
+
+
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{images/mechanical/drylin-linear-guide.png} 
@@ -116,7 +118,7 @@ The 4-bar linkage design of the leg was originally constructed by Ben Bingham in
 \label{fig:drylin-linear-guide}
 \end{figure}
 
-\subsection{CAD Robotic Leg Assembly}
+
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{images/mechanical/back-shot.png} 
@@ -185,16 +187,35 @@ The center of mass (COM) moves negligibly with the foot position. To calculate a
 \section{Electronics and Communication}
 \subsection{Accelerometer and Gyroscope}
 \subsection{Distance Sensor}
+A distance sensor was mounted to the base of the mounting plate, as seen in \cref{fig:Final leg design - back}. This provided feedback of the height of the leg's center of mass above the ground.
+
+The leg height was used for height control as well as flight phase determination.
+
+An infra-red distance sensor was chosen with a narrow beam width - this ensures there is minimal reflection off surrounding objects that could interfere with distance readings. The beam reflects off the surface of the ground and a time-of-flight calculation is used to determine distance. Infra-red is open to possible interference from surrounding fluorescent light sources, and this can be accounted for by using it in an area out of direct line of site of light sources. Infra-red was chosen because it is cheaper than an equivalent laser distance sensor.
+
+The Pololu Carrier with Sharp GP2Y0A60SZLF Analog Distance Sensor was used. It requires a $3\ V$ voltage source which can be supplied directly from the micrcontroller which runs off the same voltage. 
+
+The distance sensor outputs an analog signal which is related to the height. This analog signal is fed into the ADC of the microcontroller and using a linear relationship is mapped to the distance. 
+
+The Pololu distance sensor has a range of $10-150\ cm$, which is more than enough for the intended hopping height of $20-50\ cm$ due to the testing rig limits.
+
+The height sensor was calibrated by setting it at $0.1\ m$ from a surface and using a scaling factor to adjust the linear relation between distance and voltage until an accurate value was achieved. 
+
+A 3D printed carrier was designed for the distance sensor which offset the sensor from the mounting plate and placed it in a central location above the linear guide.
+
 \subsection{Microcontroller}
+The microcontroller had to meet the following specifications:
+\begin{itemize}
+\item 4 x UART Ports
+\item 1 x ADC
+\item 1 x Floating point unit
+\item DMA Capabilities
+\item USB Debugging
+\item 5V tolerant UART ports
+\end{itemize}
 
-\begin{figure}
-\centering
-\includegraphics[clip, trim=1cm 7cm 1cm 7cm, page = 2, width=0.8\textwidth]{pdfs/BalekaSTMConfig.pdf} 
-\caption{STM32F4 microcontroller peripheral configuration.}
-\label{fig:drylin-linear-guide}
-\end{figure}
+Being familiar with the STM32 series of microcontrollers, a STM32F4 board was chosen and met the above specifications with two additional USART ports for future peripheral needs.
 
-\subsection{Shielding}
 \section{Motors and Drivers}
 
 \subsection{Driver Selection}
@@ -298,7 +319,7 @@ The electrical and mechanical time constants of the motor, $\tau_e$ and $\tau_m$
 \end{aligned}
 \end{equation}
 
-From \cref{eqn:motor-time-constants} and using the previously calculated motor constants, $\tau_e = 7.368 \times 10^{-4}$ and $\tau_m = 3.424 \times 10^{-4}$. This is assuming a motor viscous friction of $B_m = 0$.
+From \cref{eqn:motor-time-constants} and using the previously calculated motor constants, $\tau_e = 7.368 \times 10^{-4}$ and $\tau_m = 3.424 \times 10^{-4}$. This is assuming the motor viscous friction $B_m$ is insignificant which is usually the case in mechanically well made BLDC motors.
 
 The resulting motor model open loop root-locus plot can be seen in \cref{fig:ol-motor-rlocus}. As expected the system has only negative real roots and will be stable in open loop.
 
@@ -361,11 +382,26 @@ These tests were performed with the leg attached - the inertial load provided by
 \subsection{Motor Encoders}
 \label{sec:motor-encoders}
 
+The Avago Technologies HEDL-5640-A13 rotary encoder was used for feedback of encoder position to the motor drivers which then calculate the motor position and velocity relative to a starting encoder count position. 
+
+The encoder has the following specifications:
+\begin{itemize}
+\item Optical sensing.
+\item Incremental counting.
+\item 500 counts per revolution.
+\end{itemize}
+
+The Avago encoder was chosen for its light, easily mountable frame along with the relatively high resolution position feedback of $0.72 deg./count$.
+ 
+A shaft was designed to mount to the rear of the BLDC motor and interface to the encoder. The shaft was designed in OpenSCAD using programmatic CAD and can be seen in \cref{fig:encoder-shaft}. It was 3D printed by Justin Pead in White Lab using PLA plastic. 
+
+The shaft was designed to be mounting using three hex screws to the provided mounting point on the rear of the motors. A star configuration was used for the interface between the shaft mounting point and the cylindrical encoder shaft so that these hex screws could be accessed easily.
+
+Ideally the shaft should be milled using metal for better heat dissipation. Initially, before the aluminium mounting plate was used, the encoder shafts warped slightly while in operation and had to be bent back into shape. 3D printing was used for rapid prototyping and due to cost considerations.
+
 \begin{figure}
 \centering
 \includegraphics[clip, trim = 6cm 1cm 3cm 1cm, width=0.4\textwidth]{images/mechanical/encoder-shaft} 
 \caption{3D printed PLA motor encoder shaft.}
 \label{fig:encoder-shaft}
 \end{figure} 
-
-\subsection{Tuning and Optimisation}

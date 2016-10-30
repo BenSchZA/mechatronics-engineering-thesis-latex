@@ -1,42 +1,36 @@
 \chapter{Kinematics}
 
-Originally derived in \cite{Duperret}...
+The 5-bar linkage design of the leg was first designed constructed in the study \cite{Duperret}. The geometry of the leg is fairly complex and the derivation of the kinematic equations equally so. J.M. Duperret and D.E. Koditschek derived the kinematic equations \cref{eq:forward-kinematics, eq:reverse-kinematics} in the study \cite{Duperret}. 
 
-\begin{equation}
-f(\phi_1, \phi_2) = \left(\begin{array}{cc} \sqrt{\frac{9}{100} - \frac{9\, {\sin\!\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}^2}{400}} - \frac{3\, \cos\!\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{20} & \frac{\mathrm{\phi_1}}{2} - \frac{\mathrm{\phi_2}}{2} \end{array}\right)
+In this study the assumption was made that the distance $d$, as seen in \cref{fig:Geometric view of leg}, is zero. This simplifies the derivation of forward and reverse kinematic equations of the leg design by making the leg a 4-bar linkage. These kinematic equations are more easily calculated on board a microcontroller\cite{Duperret}, leaving more processing power for other control tasks if needed. 
+
+The ease of calculation makes the loss in accuracy acceptable - in practise the simplified kinematic equations worked well with an insignificant calculation time made possible by the STM32F4's on-board floating point unit.
+
+\begin{equation} \label{eq:forward-kinematics}
+f(\phi_1, \phi_2) = \left(\begin{array}{c} \sqrt{{\mathrm{l_2}}^2 - {\mathrm{l_1}}^2\, {\sin\!\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}^2} - \mathrm{l_1}\, \cos\!\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)\\
+\frac{\mathrm{\phi_1}}{2} - \frac{\mathrm{\phi_2}}{2} \end{array}\right)
 \end{equation}
 
-\begin{equation}
+\begin{equation} \label{eq:reverse-kinematics}
 g(r, \theta) = \left(\begin{array}{c} \pi - acos(\frac{r^2 + l_1^2 - l_2^2}{2rl_1}) + \theta \\
 \pi - acos(\frac{r^2 + l_1^2 - l_2^2}{2rl_1}) - \theta  \end{array}\right)
 \end{equation}
 
-%\begin{equation}
-%J^T =  \left(\begin{array}{cc} \frac{3 \sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{40} - \frac{9 \cos\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right) \sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{800 \sqrt{\frac{9}{100} - \frac{9 {\sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}^2}{400}}} & \frac{1}{2}\\ \frac{3 \sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{40} - \frac{9 \cos\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right) \sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}{800 \sqrt{\frac{9}{100} - \frac{9 {\sin\left(\frac{\mathrm{\phi_1}}{2} + \frac{\mathrm{\phi_2}}{2}\right)}^2}{400}}} & - \frac{1}{2} \end{array}\right)
-%\end{equation}
+\section{The Jacobian}
+The Jacobian is formed by taking partial derivatives of the forward kinematic equation \cref{eq:forward-kinematics} as shown in \cref{eq:jacobian}. 
+
+It is used as a mapping from the joint angles $\phi_1$ and $\phi_1$ to the end effector generalized coordinates $r$ and $\theta$. The Jacobian can be applied in robotic kinematic control to determine joint velocities and forces to achieve a desired force or velocity at the end effector, in this case the leg foot.
 
 Taking the Jacobian of the kinematic mapping $f(\phi_1, \phi_2)$ the foot force vector, F, can be transformed to the motor torque commands, $\tau$:
-\begin{equation}
+\begin{equation} \label{eq:jacobian}
 J = \left[ \frac{\partial \textbf{f}}{\partial \textbf{X}} \right] 
 \end{equation}
 where \textbf{X} = [r $\theta$].
 
-The following force vector provides a constant angular force, $f_{theta}$:
+\subsection{Velocity Mapping}
+
+Velocity mapping from motor rotational velocity to polar velocity.
 \begin{equation}
-F = [f_r\ f_{\theta}]^T
+v(\dot{r}, \dot{\theta}) = J w(\dot{\phi_1}, \dot{\phi_2})
 \end{equation}
 
-by using $f_{s}$, a force related to the arc-length of a polar system, the relation $s = r \theta$ exists:
-\begin{equation}
-F = [f_r\ f_{s}]^T
-\end{equation}
-
-
-
-\begin{equation}
-f_a = k_s(a_{fbk} - a_{cmd}) + k_d(\dot{a}_{fbk} - \dot{a}_{cmd})
-\end{equation}
-
-\begin{equation}
-\tau = J^TF
-\end{equation}
