@@ -39,6 +39,32 @@ The control loop sampling frequency was practically limited by the motor driver 
 
 \section{Force Control}
 
+\begin{figure}
+\centering
+\subfloat[][Caption]{
+\includegraphics[width=0.8\textwidth]{images/control/forward-kinematic-motor-torque-s-0.eps} 
+}
+
+\subfloat[][Caption]{
+\includegraphics[width=0.8\textwidth]{images/control/forward-kinematic-motor-torque-theta-0.eps} 
+}
+\caption{Polar co-ordinate spring force mapping to motor torque.}
+\label{fig:Polar co-ordinate spring force mapping to motor torque}
+\end{figure}
+
+\begin{figure}
+\centering
+\subfloat[][Caption]{
+\includegraphics[width=0.8\textwidth]{images/control/forward-kinematic-motor-torque-s-only-0.eps} 
+}
+
+\subfloat[][Caption]{
+\includegraphics[width=0.8\textwidth]{images/control/forward-kinematic-motor-torque-theta-only-0.eps} 
+}
+\caption{Polar co-ordinate spring force mapping to motor torque.}
+\label{fig:Polar co-ordinate spring force mapping to motor torque}
+\end{figure}
+
 \begin{equation}
 \tau = J^TF
 \end{equation}
@@ -51,7 +77,7 @@ The control loop sampling frequency was practically limited by the motor driver 
 
 \begin{figure}
 \centering
-\includegraphics[clip, trim=2cm 7cm 5cm 3cm, page = 1, width=1\textwidth]{images/control/virtual-model-impedance.pdf} 
+\includegraphics[clip, trim=2cm 8cm 5cm 3cm, page = 1, width=1\textwidth]{images/control/virtual-model-impedance.pdf} 
 \caption{Virtual model impedance control loop.}
 \label{fig:virtual-model-impedance-loop}
 \end{figure}
@@ -62,5 +88,14 @@ Current saturation at 60A.
 
 \subsection{Torsional Spring-damper}
 $s = r \theta$\\
+
+Normalises force - same unit of measurement, couples foot force to ground contact torque.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{images/control/theta-vs-arc.eps} 
+\caption{Rotational foot force comparison using angle and arc-length torsional spring virtual model.}
+\label{fig:Rotational foot force comparison}
+\end{figure}
 
 \subsection{Full-leg vs. Joint Active Compliance}

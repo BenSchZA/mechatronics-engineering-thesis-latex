@@ -1,6 +1,5 @@
-\chapter{Communication Protocol}
-
-\section{FreeRTOS}
+\chapter{Software Design}
+\section{RTOS Communication Protocol}
 
 Ideally FreeRTOS tasks should operate with as much isolation as possible, with each task performing a specific function with different priority levels. In the case of a communication protocol, the overall task is inherently sequential so this leads to FreeRTOS being used in a sequential way with all tasks operating at real-time priority level. 
 
@@ -43,11 +42,27 @@ The default 1000 Hz tick rate was overridden with a tick rate of 5000 Hz to enab
 In order to achieve a control loop rate of 200 Hz, a sampling time of 5 ms or 25 ticks was used.
 
 \section{Packet Transmission}
-\subsection{Integrity Checking}
-CRC ...
 
 \subsection{Structuring}
 packed struct...
+
+\begin{figure}
+\centering
+\includegraphics[clip, trim=0cm 0cm 0cm 0cm, page = 1, width=1\textwidth]{images/comms/pc-tx-packet.pdf} 
+\caption{PC TX packet structure.}
+\label{fig:pc-tx-packet}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[clip, trim=0cm 0cm 0cm 0cm, page = 1, width=1\textwidth]{images/comms/pc-rx-packet.pdf} 
+\caption{PC RX packet structure.}
+\label{fig:pc-rx-packet}
+\end{figure}
+
+
+\subsection{Integrity Checking}
+CRC ...
 
 \subsection{Encoding and Decoding}
 \subsubsection{PC Packet}
@@ -99,3 +114,50 @@ SeqBits bits 2-5 switch case
 \caption{Motor driver command protocol.}
 \label{tab:motor-driver-protocol}
 \end{table}
+
+\section{Graphic User Interface}
+\label{chap:Graphic User Interface}
+
+To enable rapid prototyping, a basic pre-existing serial logging platform was used and plug-ins were developed to adapt the software for controlling, configuring, logging and live plotting of the Baleka robotic leg platform. 
+
+qSerialTerm, described as "A Qt based Serial Port terminal emulator", was built upon. It is distributed under the GNU General Public License (GPL) v3, which allows distribution, customisation and even sale of software published under the license, so long as basic conditions are met. It is copyright 2012 by Jorge Aparicio who's software repository can be found on GitHub: \url{https://github.com/JorgeAparicio/qSerialTerm}.
+
+Qt Creator CPP was used for the software development and can be compiled to run on both Linux and Windows platforms - for reference all development was completed on a Linux platform.
+
+Three .cpp files were used for the majority of the added functionality, namely: CRC.c, framewidget.cpp and serialportwidget.cpp along with their respective header files and Qt forms.
+
+\subsection{Serial Communication}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{images/gui/serial-port}
+\end{figure}
+
+\subsection{Logging}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{images/gui/logger}
+\end{figure}
+
+\subsection{Live Plotting}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/gui/plotting}
+\end{figure}
+
+\subsection{Control Plug-in}
+
+\begin{figure}
+\centering
+\subfloat[][Configuration \& On-board Control]{
+\includegraphics[width=0.4\textwidth]{images/gui/frame-1}
+}
+~
+\subfloat[][Current/Position Control \& Control Loop Gains]{
+\includegraphics[width=0.4\textwidth]{images/gui/frame-2}
+}
+\caption{Control interface plug-in.}
+\label{fig:Control interface plug-in} 
+\end{figure}

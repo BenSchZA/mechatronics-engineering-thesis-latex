@@ -1,41 +1,57 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Communication Protocol}{39}{chapter.7}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}Software Design}{45}{chapter.9}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}FreeRTOS}{39}{section.7.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.1}Heartbeat Task}{39}{subsection.7.1.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.2}PC TX Task}{40}{subsection.7.1.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.3}PC RX Task}{40}{subsection.7.1.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.4}TX Motor Task}{40}{subsection.7.1.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.5}RX Motor Task}{40}{subsection.7.1.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.6}Controller Task}{40}{subsection.7.1.6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.7}FreeRTOS Timing}{40}{subsection.7.1.7}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}Packet Transmission}{41}{section.7.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.1}Integrity Checking}{41}{subsection.7.2.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.2}Structuring}{41}{subsection.7.2.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.3}Encoding and Decoding}{41}{subsection.7.2.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\nonumberline PC Packet}{41}{section*.54}}
-\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Motor Driver Packet}{41}{section*.55}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}Peripheral Configuration}{41}{section.7.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.1}Protocol}{41}{subsection.7.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.2}Data Rates}{41}{subsection.7.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.3}Direct Memory Access}{41}{subsection.7.3.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {\relax 7.1}{\ignorespaces STM32F4 microcontroller peripheral configuration.\relax }}{42}{figure.caption.56}}
-\newlabel{fig:microcontroller-peripheral-config}{{\relax 7.1}{42}{STM32F4 microcontroller peripheral configuration.\relax }{figure.caption.56}{}}
-\newlabel{fig:microcontroller-peripheral-config@cref}{{[figure][1][7]\relax 7.1}{42}}
-\@writefile{lot}{\contentsline {table}{\numberline {\relax 7.1}{\ignorespaces Motor driver command protocol.\relax }}{42}{table.caption.59}}
-\newlabel{tab:motor-driver-protocol}{{\relax 7.1}{42}{Motor driver command protocol.\relax }{table.caption.59}{}}
-\newlabel{tab:motor-driver-protocol@cref}{{[table][1][7]\relax 7.1}{42}}
-\@writefile{lof}{\contentsline {figure}{\numberline {\relax 7.2}{\ignorespaces FreeRTOS communication protocol flow diagram.\relax }}{43}{figure.caption.57}}
-\newlabel{fig:FreeRTOS communication protocol flow diagram.}{{\relax 7.2}{43}{FreeRTOS communication protocol flow diagram.\relax }{figure.caption.57}{}}
-\newlabel{fig:FreeRTOS communication protocol flow diagram.@cref}{{[figure][2][7]\relax 7.2}{43}}
-\@writefile{lof}{\contentsline {figure}{\numberline {\relax 7.3}{\ignorespaces Communication protocol packet timing with 5 ms sampling rate.\relax }}{44}{figure.caption.58}}
-\newlabel{fig:packet-timing}{{\relax 7.3}{44}{Communication protocol packet timing with 5 ms sampling rate.\relax }{figure.caption.58}{}}
-\newlabel{fig:packet-timing@cref}{{[figure][3][7]\relax 7.3}{44}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}RTOS Communication Protocol}{45}{section.9.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.1}Heartbeat Task}{45}{subsection.9.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.2}PC TX Task}{46}{subsection.9.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.3}PC RX Task}{46}{subsection.9.1.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.4}TX Motor Task}{46}{subsection.9.1.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.5}RX Motor Task}{46}{subsection.9.1.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.6}Controller Task}{46}{subsection.9.1.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.7}FreeRTOS Timing}{46}{subsection.9.1.7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\relax 9.1}{\ignorespaces PC TX packet structure.\relax }}{47}{figure.caption.58}}
+\newlabel{fig:pc-tx-packet}{{\relax 9.1}{47}{PC TX packet structure.\relax }{figure.caption.58}{}}
+\newlabel{fig:pc-tx-packet@cref}{{[figure][1][9]\relax 9.1}{47}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\relax 9.2}{\ignorespaces PC RX packet structure.\relax }}{47}{figure.caption.59}}
+\newlabel{fig:pc-rx-packet}{{\relax 9.2}{47}{PC RX packet structure.\relax }{figure.caption.59}{}}
+\newlabel{fig:pc-rx-packet@cref}{{[figure][2][9]\relax 9.2}{47}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}Packet Transmission}{47}{section.9.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.1}Structuring}{47}{subsection.9.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.2}Integrity Checking}{47}{subsection.9.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.3}Encoding and Decoding}{47}{subsection.9.2.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline PC Packet}{47}{section*.60}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Motor Driver Packet}{47}{section*.61}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\relax 9.3}{\ignorespaces STM32F4 microcontroller peripheral configuration.\relax }}{48}{figure.caption.62}}
+\newlabel{fig:microcontroller-peripheral-config}{{\relax 9.3}{48}{STM32F4 microcontroller peripheral configuration.\relax }{figure.caption.62}{}}
+\newlabel{fig:microcontroller-peripheral-config@cref}{{[figure][3][9]\relax 9.3}{48}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.3}Peripheral Configuration}{48}{section.9.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3.1}Protocol}{48}{subsection.9.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3.2}Data Rates}{48}{subsection.9.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3.3}Direct Memory Access}{48}{subsection.9.3.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\relax 9.4}{\ignorespaces FreeRTOS communication protocol flow diagram.\relax }}{49}{figure.caption.63}}
+\newlabel{fig:FreeRTOS communication protocol flow diagram.}{{\relax 9.4}{49}{FreeRTOS communication protocol flow diagram.\relax }{figure.caption.63}{}}
+\newlabel{fig:FreeRTOS communication protocol flow diagram.@cref}{{[figure][4][9]\relax 9.4}{49}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\relax 9.5}{\ignorespaces Communication protocol packet timing with 5 ms sampling rate.\relax }}{50}{figure.caption.64}}
+\newlabel{fig:packet-timing}{{\relax 9.5}{50}{Communication protocol packet timing with 5 ms sampling rate.\relax }{figure.caption.64}{}}
+\newlabel{fig:packet-timing@cref}{{[figure][5][9]\relax 9.5}{50}}
+\@writefile{lot}{\contentsline {table}{\numberline {\relax 9.1}{\ignorespaces Motor driver command protocol.\relax }}{50}{table.caption.65}}
+\newlabel{tab:motor-driver-protocol}{{\relax 9.1}{50}{Motor driver command protocol.\relax }{table.caption.65}{}}
+\newlabel{tab:motor-driver-protocol@cref}{{[table][1][9]\relax 9.1}{50}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.4}Graphic User Interface}{50}{section.9.4}}
+\newlabel{chap:Graphic User Interface}{{9.4}{50}{Graphic User Interface}{section.9.4}{}}
+\newlabel{chap:Graphic User Interface@cref}{{[section][4][9]9.4}{50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.1}Serial Communication}{51}{subsection.9.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.2}Logging}{51}{subsection.9.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.3}Live Plotting}{51}{subsection.9.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.4}Control Plug-in}{51}{subsection.9.4.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\relax 9.6}{\ignorespaces Control interface plug-in.\relax }}{52}{figure.caption.69}}
+\newlabel{fig:Control interface plug-in}{{\relax 9.6}{52}{Control interface plug-in.\relax }{figure.caption.69}{}}
+\newlabel{fig:Control interface plug-in@cref}{{[figure][6][9]\relax 9.6}{52}}
 \@setckpt{chap/comms}{
-\setcounter{page}{45}
+\setcounter{page}{53}
 \setcounter{equation}{0}
 \setcounter{enumi}{5}
 \setcounter{enumii}{0}
@@ -44,18 +60,18 @@
 \setcounter{footnote}{0}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
-\setcounter{chapter}{7}
-\setcounter{section}{3}
-\setcounter{subsection}{3}
+\setcounter{chapter}{9}
+\setcounter{section}{4}
+\setcounter{subsection}{4}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{3}
+\setcounter{figure}{6}
 \setcounter{table}{1}
 \setcounter{parentequation}{0}
 \setcounter{Item}{17}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{71}
+\setcounter{bookmark@seq@number}{79}
 \setcounter{blindtext}{1}
 \setcounter{Blindtext}{5}
 \setcounter{blind@countparstart}{0}
@@ -72,7 +88,7 @@
 \setcounter{FancyVerbLine}{0}
 \setcounter{float@type}{8}
 \setcounter{linenumber}{1}
-\setcounter{LN@truepage}{60}
+\setcounter{LN@truepage}{68}
 \setcounter{FancyVerbLineBreakLast}{0}
 \setcounter{minted@FancyVerbLineTemp}{0}
 \setcounter{listing}{0}
