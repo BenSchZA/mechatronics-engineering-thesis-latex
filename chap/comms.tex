@@ -1,4 +1,4 @@
-\chapter{Software Design}
+\chapter{Software Development}
 \section{RTOS Communication Protocol}
 
 Ideally FreeRTOS tasks should operate with as much isolation as possible, with each task performing a specific function with different priority levels. In the case of a communication protocol, the overall task is inherently sequential so this leads to FreeRTOS being used in a sequential way with all tasks operating at real-time priority level. 
@@ -131,6 +131,8 @@ Three .cpp files were used for the majority of the added functionality, namely: 
 \begin{figure}
 \centering
 \includegraphics[width=0.3\textwidth]{images/gui/serial-port}
+\caption{Serial port configuration.}
+\label{fig:serial-config}
 \end{figure}
 
 \subsection{Logging}
@@ -138,6 +140,8 @@ Three .cpp files were used for the majority of the added functionality, namely: 
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{images/gui/logger}
+\caption{Packet data CSV logging.}
+\label{fig:packet-logging}
 \end{figure}
 
 \subsection{Live Plotting}
@@ -145,6 +149,8 @@ Three .cpp files were used for the majority of the added functionality, namely: 
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{images/gui/plotting}
+\caption{Live plotting of motor feedback and controller data.}
+\label{fig:live-plotting}
 \end{figure}
 
 \subsection{Control Plug-in}

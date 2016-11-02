@@ -1,0 +1,22 @@
+\chapter{Geometric Simulation Code}
+
+\begin{listing}[ht]
+\begin{minted}[
+linenos,
+bgcolor=smokyblack]{Matlab}
+l1 = 0.15; %length of upper linkage in m (measured from center of joint of 5 cm diameter)
+l2 = 0.3; %length of lower linkage in m (measured from center of joint of 5 cm diameter)
+
+phi1 = (1/9*pi):0.125:pi; % all possible phi1 values
+phi2 = (1/9*pi):0.125:pi; % all possible phi2 values
+
+[PHI1, PHI2] = meshgrid(phi1, phi2); % generate a grid of phi1 and phi2 values
+
+R = -l1*cos((PHI1 + PHI2)./2) + sqrt(l2^2 - l1^2*sin((PHI1 + PHI2)./2).^2);
+THETA = (PHI1 - PHI2)./2;
+
+plot(THETA(:), R(:), 'r.', 'MarkerSize', 20);
+\end{minted}
+\caption{Geometric simulation code to generate kinematic workspace.}
+\label{listing:Geometric simulation code}
+\end{listing}

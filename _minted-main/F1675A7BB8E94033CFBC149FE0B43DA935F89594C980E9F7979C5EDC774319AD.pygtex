@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{l1} \PYG{p}{=} \PYG{l+m+mf}{0.15}\PYG{p}{;} \PYG{c}{\PYGZpc{}length of upper linkage in m (measured from center of joint of 5 cm diameter)}
+\PYG{n}{l2} \PYG{p}{=} \PYG{l+m+mf}{0.3}\PYG{p}{;} \PYG{c}{\PYGZpc{}length of lower linkage in m (measured from center of joint of 5 cm diameter)}
+
+\PYG{n}{phi1} \PYG{p}{=} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{l+m+mi}{9}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{p}{):}\PYG{l+m+mf}{0.125}\PYG{p}{:}\PYG{n+nb}{pi}\PYG{p}{;} \PYG{c}{\PYGZpc{} all possible phi1 values}
+\PYG{n}{phi2} \PYG{p}{=} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{l+m+mi}{9}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{p}{):}\PYG{l+m+mf}{0.125}\PYG{p}{:}\PYG{n+nb}{pi}\PYG{p}{;} \PYG{c}{\PYGZpc{} all possible phi2 values}
+
+\PYG{p}{[}\PYG{n}{PHI1}\PYG{p}{,} \PYG{n}{PHI2}\PYG{p}{]} \PYG{p}{=} \PYG{n+nb}{meshgrid}\PYG{p}{(}\PYG{n}{phi1}\PYG{p}{,} \PYG{n}{phi2}\PYG{p}{);} \PYG{c}{\PYGZpc{} generate a grid of phi1 and phi2 values}
+
+\PYG{n}{R} \PYG{p}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{l1}\PYG{o}{*}\PYG{n+nb}{cos}\PYG{p}{((}\PYG{n}{PHI1} \PYG{o}{+} \PYG{n}{PHI2}\PYG{p}{)}\PYG{o}{./}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{+} \PYG{n+nb}{sqrt}\PYG{p}{(}\PYG{n}{l2}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{\PYGZhy{}} \PYG{n}{l1}\PYGZca{}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nb}{sin}\PYG{p}{((}\PYG{n}{PHI1} \PYG{o}{+} \PYG{n}{PHI2}\PYG{p}{)}\PYG{o}{./}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{.\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n}{THETA} \PYG{p}{=} \PYG{p}{(}\PYG{n}{PHI1} \PYG{o}{\PYGZhy{}} \PYG{n}{PHI2}\PYG{p}{)}\PYG{o}{./}\PYG{l+m+mi}{2}\PYG{p}{;}
+
+\PYG{n}{plot}\PYG{p}{(}\PYG{n}{THETA}\PYG{p}{(:),} \PYG{n}{R}\PYG{p}{(:),} \PYG{l+s}{\PYGZsq{}r.\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}MarkerSize\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{);}
+\end{Verbatim}

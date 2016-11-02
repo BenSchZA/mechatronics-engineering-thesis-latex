@@ -1,6 +1,6 @@
 % Arara build configuration:
 % arara: pdflatex: {synctex: on, shell: true}
-% bibtex
+% arara: bibtex
 % nomencl: {style: 'nomencl'}
 % pdflatex: { synctex: on }
 % pdflatex: { synctex: on }
@@ -53,7 +53,7 @@ come to an end; then stop.''}\vskip1em}
 \include{chap/legdesign}
 \definecolor{smokyblack}{rgb}{0.06, 0.05, 0.03}
 \include{chap/comms}
-\include{chap/gui}
+%\include{chap/gui}
 \include{chap/dynamics}
 \include{chap/control}
 
@@ -73,5 +73,8 @@ come to an end; then stop.''}\vskip1em}
 
 \appendix
 \include{app/ap01}
+\include{app/ap02}
+\include{app/ap03}
+\include{app/ap04}
 
 \end{document}

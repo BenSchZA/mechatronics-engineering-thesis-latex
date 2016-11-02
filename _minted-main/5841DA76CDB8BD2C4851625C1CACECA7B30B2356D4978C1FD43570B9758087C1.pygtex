@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{SHOT} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{r\PYGZus{}fbk} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mf}{0.38}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{r\PYGZus{}cmd} \PYG{o}{=} \PYG{l+m+mf}{0.3}\PYG{p}{;}
+        \PYG{n}{k\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{n}{k\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mf}{0.1}\PYG{p}{;}
+        \PYG{n}{ks\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{633}\PYG{p}{;}
+        \PYG{n}{kd\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{15}\PYG{p}{;}
+        \PYG{n}{ks\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mi}{400}\PYG{p}{;}
+        \PYG{n}{kd\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mi}{5}\PYG{p}{;}
+        \PYG{n}{SHOT} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{n}{TRIGGER} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{c+c1}{//DANGEROUS!}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{PULLED} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{ELAPSED} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1000}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+        \PYG{n}{r\PYGZus{}cmd} \PYG{o}{=} \PYG{l+m+mf}{0.4}\PYG{p}{;}
+        \PYG{n}{k\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{n}{k\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mf}{0.1}\PYG{p}{;}
+        \PYG{n}{ks\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{1726}\PYG{p}{;}
+        \PYG{n}{kd\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{n}{ks\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mi}{400}\PYG{p}{;}
+        \PYG{n}{kd\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mi}{5}\PYG{p}{;}
+        \PYG{n}{SHOT} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{n}{PULLED} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{n}{ELAPSED} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{TRIGGER}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{r\PYGZus{}cmd} \PYG{o}{=} \PYG{l+m+mf}{0.25}\PYG{p}{;}
+        \PYG{n}{k\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{n}{k\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mf}{0.1}\PYG{p}{;}
+        \PYG{n}{ks\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{633}\PYG{p}{;}
+        \PYG{n}{kd\PYGZus{}r} \PYG{o}{=} \PYG{l+m+mi}{15}\PYG{p}{;}
+        \PYG{n}{ks\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mi}{400}\PYG{p}{;}
+        \PYG{n}{kd\PYGZus{}s} \PYG{o}{=} \PYG{l+m+mi}{5}\PYG{p}{;}
+        \PYG{n}{ELAPSED} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{n}{TRIGGER} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{n}{PULLED} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{else}\PYG{p}{\PYGZob{}}
+        \PYG{n}{ELAPSED}\PYG{o}{++}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

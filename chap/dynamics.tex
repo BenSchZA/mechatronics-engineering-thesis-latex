@@ -1,4 +1,5 @@
 \chapter{Dynamic Modelling}
+\label{chap:Dynamic Modelling}
 
 \section{Robotic Leg Modelling}
 
@@ -24,6 +25,7 @@ In the study \cite{Yu2006} a Lagrangian model and control system was developed f
 \end{figure}
 
 \section{Spring-damper Mass Motion}
+\label{sec:Spring-damper Mass Motion}
 Using Newton's second law, the downward force of a mass under acceleration is:
 \begin{equation}
 F_m = ma = m\ddot{x}
@@ -111,6 +113,21 @@ The leg, when viewed as a spring-damper mass system in free space, has a mass of
 
 On impact and launching the leg spring-damper mass system is in contact with the ground and therefore the mass of the plate and motors acts on the entire system with a mass of approximately $2.2\ kg$.
 
+\subsection{Launch Energy}
+In order to launch the leg a set height of $0.4\ m$, the spring potential energy needs to be efficiently transferred into kinetic energy. This kinetic energy will launch the leg to a height with a corresponding potential energy. To calculate the spring constant needed to complete this jump assuming $80\ \%$ mechanical efficiency, equation \cref{eq:spring-launch-energy-conservation} is used. This is based on the principal of conservation of energy.
+
+From \cref{eq:spring-damper-energy}, $E_{ps} = \frac{1}{2}k\Delta x^2$. Using an initial radial set-point of $0.3\ m$ and decompressing the spring to a radial set-point of $0.4\ m$ we get a $\delta x$ value of $-0.1\ m$.
+
+\begin{equation} \label{eq:spring-launch-energy-conservation}
+\begin{aligned}
+&E_p = E_{ps} \\
+&mgh = \frac{1}{2}k \Delta x^2 \\
+&k = \frac{2mgh}{\Delta x^2} = \frac{2\times 2.2 \times 9.81 \times 0.4}{0.1^2} = 1726.6\ N/m
+\end{aligned}
+\end{equation}
+
+The calculated spring constant of $1726.6\ N/m$ was used during the jump tests.
+
 \subsection{Impact Energy}
 When the leg is dropped on the linear guide from its maximum height of $0.5\ m$ the potential energy that needs to be absorbed by the spring-damper is $10.791\ J$ as calculated in \cref{eq:spring-energy-drop}.
 \begin{equation} \label{eq:spring-energy-drop}
@@ -139,19 +156,6 @@ A theoretical value for the spring constant $k$ can be found by using conservati
 &E_p = E_{ps} + E_{kd} \\
 &mgh = \frac{1}{2}kx^2 + \frac{1}{2}c\dot{x}^2\\
 &k = \frac{2(mgh - \frac{1}{2}c\dot{x}^2)}{x^2} = \frac{2(10.791 - \frac{1}{2}\times 5\times 2^2)}{(0.35-0.3)^2} = 632.8\ N/m
-\end{aligned}
-\end{equation}
-
-\subsection{Launch Energy}
-In order to launch the leg a set height of $0.4\ m$, the spring potential energy needs to be efficiently transferred into kinetic energy. This kinetic energy will launch the leg to a height with a corresponding potential energy. To calculate the spring constant needed to complete this jump assuming $80\ \%$ mechanical efficiency, equation \cref{eq:spring-launch-energy-conservation} is used. This is based on the principal of conservation of energy.
-
-From \cref{eq:spring-damper-energy}, $E_{ps} = \frac{1}{2}k\Delta x^2$. Using an initial radial set-point of $0.3\ m$ and decompressing the spring to a radial set-point of $0.4\ m$ we get a $\delta x$ value of $-0.1\ m$.
-
-\begin{equation} \label{eq:spring-launch-energy-conservation}
-\begin{aligned}
-&E_p = E_{ps} \\
-&mgh = \frac{1}{2}k \Delta x^2 \\
-&k = \frac{2mgh}{\Delta x^2} = \frac{2\times 2.2 \times 9.81 \times 0.4}{0.1^2} = 1726.6\ N/m
 \end{aligned}
 \end{equation}
 

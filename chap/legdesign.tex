@@ -100,6 +100,7 @@ The 4-bar linkage design of the leg was originally constructed by Ben Bingham in
 
 
 \subsection{Testing Platform}
+\label{subsec:Testing Platform}
 
 
 \begin{figure}
@@ -154,7 +155,7 @@ The center of mass (COM) moves negligibly with the foot position. To calculate a
 \textbf{Total:}                                 & \textbf{}             & \textbf{}    & \textbf{1793.88} 
 \end{tabular}
 \caption{Solidworks leg assembly mass distribution.}
-\label{my-label}
+\label{tbl:Solidworks leg assembly mass distribution}
 \end{table}
 
 \begin{figure}
@@ -192,7 +193,14 @@ The Pololu distance sensor has a range of $10-150\ cm$, which is more than enoug
 
 The height sensor was calibrated by setting it at $0.1\ m$ from a surface and using a scaling factor to adjust the linear relation between distance and voltage until an accurate value was achieved. 
 
-A 3D printed carrier was designed for the distance sensor which offset the sensor from the mounting plate and placed it in a central location above the linear guide.
+A 3D printed carrier, a render of which can be seen in \cref{fig:distance-sensor-mount}, was designed for the distance sensor which offset the sensor from the mounting plate and placed it in a central location above the linear guide.
+
+\begin{figure}
+\centering
+\includegraphics[clip, trim=4cm 0cm 2cm 0cm, width=0.6\textwidth]{images/mechanical/distance-sensor-mount} 
+\caption{3D printed PLA distance sensor mount.}
+\label{fig:distance-sensor-mount}
+\end{figure}
 
 \subsection{Microcontroller}
 The microcontroller had to meet the following specifications:
@@ -210,6 +218,8 @@ Being familiar with the STM32 series of microcontrollers, a STM32F4 board was ch
 \section{Motors and Drivers}
 
 \subsection{Driver Selection}
+
+Motor current requirements seen in \cref{fig:motor-current-requirements}...
 
 \begin{figure}
 \centering
