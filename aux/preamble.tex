@@ -8,11 +8,17 @@
 
 \renewcommand{\autodot}{}% Remove all end-of-counter dots
 \addtokomafont{pagenumber}{\large\sffamily}
+\addtokomafont{disposition}{\rmfamily}
 
 %\usepackage{showframe}  %to show typing area, header, footer, margins
 
+\usepackage{notoccite}
+
 \usepackage{microtype} %improve font spacing
+
+\edef\restoreparindent{\parindent=\the\parindent\relax}
 \usepackage{parskip}
+\restoreparindent
 
 \usepackage[english]{babel}
 \usepackage{amsmath}
@@ -42,6 +48,9 @@
 \usepackage{minted}
 \usemintedstyle{fruity}
 \usepackage[table,xcdraw]{xcolor}
+
+\usepackage{rotating} %rotated tables
+\usepackage{pbox} %table newline box
 
 \usepackage{float}
 \usepackage{graphicx}

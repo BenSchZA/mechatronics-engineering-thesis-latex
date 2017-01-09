@@ -18,7 +18,6 @@
 \include{misc/termsofreference}
 
 \textsf{\tableofcontents}
-%\tableofcontents
 
 \listoffigures
 \listoftables
@@ -28,53 +27,45 @@
 %\printnomenclature
 
 \mainmatter
-%ch01: Introduction
-%ch02: Literature Review
-%ch03: Project Plan and Methodology
-%ch04: Theory Development
-%ch05: System Modelling and Simulation
-%ch06: Conclusions
-%ch07: Recommendations and Future Work
-
-%\autoref{chap:intro}
 
 \setchapterpreamble[uc][.75\textwidth]{%
 \dictum[Lewis Carroll, \textit{Alice in Wonderland}]{%
 ``Begin at the beginning,'' the King said, gravely, ``and go on till you
 come to an end; then stop.''}\vskip1em}
-
 \include{chap/intro}
 \include{chap/litreview}
+\setchapterpreamble[uc][.75\textwidth]{%
+\dictum[Sherlock Holmes in Arthur Conan Doyle, \textit{The Crooked Man}]{%
+``You know my methods, Watson.''}\vskip1em}
 \include{chap/projplan}
-\include{chap/theorydev}
-\include{chap/modelling}
 \include{chap/kinematics}
-\include{chap/simulation}
-\include{chap/legdesign}
-\definecolor{smokyblack}{rgb}{0.06, 0.05, 0.03}
-\include{chap/comms}
-%\include{chap/gui}
 \include{chap/dynamics}
-\include{chap/control}
-
+\include{chap/hardware}
+\definecolor{smokyblack}{rgb}{0.06, 0.05, 0.03}
+\include{chap/software}
 \setchapterpreamble[uc][.75\textwidth]{%
 \dictum[Van Halen, \textit{1984}]{%
 ``Jump!''}\vskip1em}
-
+\include{chap/control}
+\setchapterpreamble[uc][.75\textwidth]{%
+\dictum[Sherlock Holmes in Arthur Conan Doyle, \textit{The Adventure of the Copper Beeches}]{%
+```Data! Data! Data!' he cried impatiently. `I can't make bricks without clay.'''}\vskip1em}
 \include{chap/testing}
-\include{chap/validation}
+\include{chap/discussion}
+\setchapterpreamble[uc][.75\textwidth]{%
+\dictum[C.S. Lewis, \textit{The Last Battle}]{%
+``One always feels better when one has made up one's mind.''}\vskip1em}
 \include{chap/conclusions}
 \include{chap/recommendations}
-
-%\include{misc/references}
 \bibliographystyle{ieeetran}
 \renewcommand{\bibname}{References}
 \bibliography{aux/bibliography}
 
 \appendix
-\include{app/ap01}
 \include{app/ap02}
-\include{app/ap03}
+\include{app/ap01}
+\include{app/ap05}
 \include{app/ap04}
+\include{app/ap03}
 
 \end{document}

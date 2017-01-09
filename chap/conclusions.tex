@@ -1,1 +1,43 @@
 \chapter{Conclusions}
+
+As developed in \cref{chap:intro}, the purpose of the study is stated below:
+
+\subsubsection*{The purpose of this study is to develop a robust robotic leg platform and testing rig capable of rapid acceleration and high fidelity force control experimentation.}
+
+By critically considering the original research questions the purpose of the study can been validated:
+
+\subsubsection*{Is a virtual model a suitable replacement for accurate dynamic modelling in complex robotic topologies?} 
+
+In \cref{chap:Dynamic Modelling} the virtual model was developed as a spring-damper compliance model coupled to the kinematic design developed in \cref{chap:kinematics}. 
+
+During the virtual model dynamic spring-damper and drop tests, model parameters for the most part were accurate to the theoretical model development - the maximum deviation of the natural oscillation frequency, $\omega_0$, was $14\%$. 
+
+During the trajectory tracking tests the maximum deviation from the trajectory set-point was $0.01\ m$ with mean Cartesian correlation values of $\rho_x = 0.77$ and $\rho_y = 0.60$. 
+
+These results conclude that a virtual model is a suitable replacement for an accurate dynamic model in controlling complex robotic topologies such as Baleka.
+
+\subsubsection*{Can high fidelity force control be effectively implemented without using force feedback?}
+
+Force control was developed in \cref{chap:Controller Development} using the forward kinematic Jacobian to map the end effector virtual model force to the necessary motor torques. A transparent coupling between the direct drive motor and end effector was required in order to achieve high fidelity proprioceptive force control. 
+
+Although an accurate digital logging load cell was not available to test dynamic proprioceptive force control, it was tested in the static case. From the force control calibration and fidelity tests of \cref{chap:Experimental Testing} the following conclusions were drawn:
+
+\begin{enumerate}
+\item A torque constant of $K_t = 0.08\ Nm/A$ was derived to properly calibrate the radial foot force output - previous research by \cite{Kalouche2016} confirmed a torque constant of $0.072\ Nm/A$. This confirms the calibration methods for force control.
+\item Using a spring constant of $K_s = 200\ N/m$ the estimated radial foot force followed a gradient of $200$ in relation to radial offset. The force measured using a load cell followed a gradient of $185.54$ - this shows the limited mechanical impedance between the motor and end effector coupling and validates the achievement of high fidelity proprioceptive force control.
+\item Both the estimated and measured force profiles followed a linear model - this shows the limited effect of Jacobian force mapping distortion.
+\end{enumerate}
+
+\subsubsection*{Is a virtual compliance control system effective in handling high speed impacts and executing rapid acceleration manoeuvres?}
+
+During the jump tests in \cref{chap:Experimental Testing} the following dynamic performance was achieved:
+
+\begin{enumerate}
+\item During impact the robot end effector experienced a force of magnitude $55\ N$ - this force was dissipated within $15\ ms$ with accurate current command tracking. The virtual compliance model successfully handled high speed impacts.
+\item The controller, using the virtual spring model decompression action, effected a highly impulsive force command delivering $8.63\ J$ of energy. The leg extended at a rate  of $1.15\ m/s$ for the body to reach a maximum height of $0.4\ m$.
+\item During the dynamic flight phase, the leg settled within $20\ ms$ after the recovery control action was triggered.
+\end{enumerate}
+
+These performance measures validate the design, modelling, and control system's ability to handle dynamic manoeuvres such as impact absorption and launch control. The consecutive jump tests that were performed show that robust hopping control was achieved with an $8.57\%$ mean time shift and a negligible mean peak force deviation over 7 consecutive jumps.  
+
+In conclusion, a robust robotic platform was successfully developed that enabled high fidelity force control using a virtual compliance model. The research contributed a platform and control framework that can be effectively used in future rapid acceleration research in the UCT Mechatronics Lab.

@@ -1,5 +1,5 @@
 \chapter{Communication Protocol Code}
-\label{app:Code}
+\label{app:Communication Protocol Code}
 Included pieces of code that may not be obvious to users or code that was particularly important to the operation of the protocol.
 
 %\inputminted{octave}{BitXorMatrix.m}
@@ -33,7 +33,7 @@ struct __attribute__((__packed__)) RXPacketStruct {
 };
 \end{minted}
 \caption{PC RX "packed" packet structure.}
-\label{listing:packet-packet}
+\label{listing:packed-packet}
 \end{listing}
 
 \begin{listing}[ht]
@@ -85,12 +85,23 @@ if(xSemaphoreTake( PCRXHandle, portMAX_DELAY ) == pdTRUE) {
 \begin{minted}[
 linenos,
 bgcolor=smokyblack]{c}
-void BaseCommandCompile(uint8_t n, uint8_t SeqBits, uint8_t ComBits, 
-uint8_t INDOFF1, uint8_t INDOFF2, uint8_t *DATA, 
-uint8_t LEN, uint8_t SNIP);
+struct __attribute__((__packed__)) BaseCommandStruct {
+        uint8_t START[2];
+        uint8_t CB;
+        uint8_t INDOFF[2];
+        uint8_t LEN;
+        uint8_t CRC1[2];
+        uint8_t DATA[4];
+        uint8_t CRC2[2];
+};
+
+uint8_t SNIP;
+
+struct BaseCommandStruct BaseCommand[50];
+struct BaseCommandStruct* BaseCommandPTR;
 \end{minted}
-\caption{Motor packet compilation function.}
-\label{listing:Motor packet compilation function}
+\caption{Motor packet array of structs.}
+\label{listing:Motor packet array of structs}
 \end{listing}
 
 \begin{listing}[ht]

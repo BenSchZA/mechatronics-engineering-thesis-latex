@@ -1,0 +1,28 @@
+\chapter{Motor Driver Command Protocol}
+\label{chap:Motor Driver Command Protocol}
+
+\begin{sidewaystable}[]
+\centering
+\begin{tabular}{llllllll}
+\textbf{Command}  & \textbf{\pbox{20cm}{Packet\\Index}} & \textbf{\pbox{20cm}{Command\\Bits}} & \textbf{\pbox{20cm}{Sequence Bits\\ (Op-code)}} & \textbf{\pbox{20cm}{Address\\Index}} & \textbf{\pbox{20cm}{Address\\Offset}} & \textbf{Function}                    & \textbf{Notes}         \\
+KILL\_BRIDGE       & 0                     & 0x02                  & 0001                             & 0x01                   & 0x00                    & \pbox{20cm}{Kill motor\\ driver bridge.}            &                        \\
+WRITE\_ENABLE      & 1                     & 0x02                  & 0010                             & 0x07                   & 0x00                    & Enable write access.                 &                        \\
+BRIDGE\_ENABLE     & 2                     & 0x02                  & 0100                             & 0x01                   & 0x00                    & \pbox{20cm}{Enable motor\\ driver bridge.}          &                        \\
+CURRENT\_COMMAND   & 20/21                 & 0x02                  & 0011                             & 0x45                   & 0x02                    & Command a current.                   & Conversion needed.     \\
+POSITION\_COMMAND  & 22/23                 & 0x02                  & 1010                             & 0x45                   & 0x00                    & Command a position                   & Conversion needed.     \\
+READ\_CURRENT      & 5                     & 0x01                  & 1100                             & 0x10                   & 0x03                    & Read current motor.                  & Conversion needed.     \\
+READ\_POSITION     & 6                     & 0x01                  & 1111                             & 0x12                   & 0x00                    & \pbox{20cm}{Read motor position\\ in counts.}       & Conversion needed.     \\
+READ\_VELOCITY     & 7                     & 0x01                  & 0101                             & 0x11                   & 0x02                    & \pbox{20cm}{Read motor velocity\\ in cts/s.}        & Conversion needed.     \\
+ZERO\_POSITION     & 8                     & 0x02                  &                                  & 0x01                   & 0x00                    & \pbox{20cm}{Re-callibrate encoder\\ zero position.} &                        \\
+GAIN\_SET          & 9                     & 0x02                  &                                  & 0x01                   & 0x01                    & \pbox{20cm}{Select gain set\\ 1 or 2.}              & Requires bit toggling. \\
+GAIN\_CHANGE\_M1: P & 10                    & 0x02                  &                                  & 0x38                   & 0x00                    & \pbox{20cm}{Set driver position\\ loop gain.}       &                        \\
+GAIN\_CHANGE\_M1: I & 11                    & 0x02                  &                                  & 0x38                   & 0x02                    & \pbox{20cm}{Set driver position\\ loop gain.}       &                        \\
+GAIN\_CHANGE\_M1: D & 12                    & 0x02                  &                                  & 0x38                   & 0x04                    & \pbox{20cm}{Set driver position\\ loop gain.}       &                        \\
+GAIN\_CHANGE\_M2: P & 13                    & 0x02                  &                                  & 0x38                   & 0x00                    & \pbox{20cm}{Set driver position\\ loop gain.}       &                        \\
+GAIN\_CHANGE\_M2: I & 14                    & 0x02                  &                                  & 0x38                   & 0x02                    & \pbox{20cm}{Set driver position\\ loop gain.}       &                        \\
+GAIN\_CHANGE\_M2: D & 15                    & 0x02                  &                                  & 0x38                   & 0x04                    & \pbox{20cm}{Set driver position\\ loop gain.}       &                        \\
+CONFIG\_SET        & 16                    & 0x02                  & 1001                             & 0xD1                   & 0x00                    & \pbox{20cm}{Select configuration\\ 1 or 2.}         & Requires bit toggling.
+\end{tabular}
+\caption{Motor driver command protocol.}
+\label{tbl:motor-driver-protocol}
+\end{sidewaystable}

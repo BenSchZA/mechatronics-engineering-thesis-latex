@@ -1,3 +1,35 @@
-\chapter{Recommendations and Future Work}
+\chapter{Recommendations}
 
-Implement PID or MPC flight control with virtual model ground force control.
+Certain areas of research were out of the scope of this study, but would be interesting to investigate in future work. Various short-comings and limitations were also outlined in the report, these can be addressed in further study. 
+
+Virtual model control and its applications in robotics are endless  and relatively new in the field of control. With the UCT Cheetah project under way and the Baleka platform successfully created, research can now be performed beyond what has been achieved in this study. The primary purpose of this study was the design and development of the platform, with less emphasis on the modelling and control further than virtual model control.
+
+\section{Modelling}
+
+The design of the leg was performed in Solidworks which enables extensive stress testing and finite element analysis of the leg under load. In the case of a similar leg being implemented on a complete robotic platform such as the UCT Cheetah, the leg will need to be properly modelled to ensure it can withstand these stresses and perform with increased joint torque.
+
+The Lagrangian dynamics of the robot proved to be complex and worthy of a study in itself. \cite{Yu2006} developed this dynamic model for a leg of similar topology, which could be studied and adapted for use with the Baleka platform.
+
+\section{Design}
+
+Mechanically the leg design needs a lot of work. The linkage systems, although performing adequately under the scope of the project, would need to be machined and redesigned for use in the 3 dimensional case. During dynamic jumping the leg experienced significant torque around the joints which resulted in mechanical impedance - the use of washers, nuts and bolts was not suited to this and under further extensive testing may prove problematic.
+
+Due to time constraints the smaller testing rig linear guide rail and carriage were chosen due to availability. The linear guide experienced significant forward rotational torque - either the guide should be increased in size, or the robot should be better balanced in this axis by using co-linear motor mounts.
+
+The motor drivers reached a current saturation point due to the $60\ A$ peak current limit. For added mass or more dynamic movement, this will need to be significantly increased to avoid current cut-out.
+
+The virtual model would benefit from a control sampling frequency in the kilohertz time scale. Due to motor driver command response time limits and baud rate limits this was not possible. The RTOS framework developed for Baleka was capable of kilohertz time scale sampling frequencies and could be adapted for future robotic research.
+
+\section{Control}
+
+Although the virtual model performed well for energy control with simple jumping, MPC control could be investigated as an alternative.
+
+Trajectory planning and optimization could be investigated and potentially make up a research project in itself, in the three dimensional case.
+
+Further development of a Raibert type controller, using the kinematics and virtual model control already implemented, should be investigated for forward movement as seen in \cite{Raibert1984}.
+
+\section{Experiments}
+
+Further experimentation should be performed by designing a rotational test rig. This would add another dimension to the control problem and allow further research in Raibert type hopping control. 
+
+A digital logging load cell or on-board force sensor should be used to better validate the virtual model force control implemented in this study. Manual logging, although adequate for calibration of static force output, does not guarantee dynamic force control fidelity.

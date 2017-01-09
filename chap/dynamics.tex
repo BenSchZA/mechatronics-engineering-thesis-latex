@@ -1,31 +1,65 @@
 \chapter{Dynamic Modelling}
 \label{chap:Dynamic Modelling}
 
-\section{Robotic Leg Modelling}
+\section{Virtual Compliance Model}
+\label{sec:Virtual Compliance Model}
 
-\subsection{Virtual Model}
-Simplicity 
-\subsection{Dynamic Model}
-Complexity
-\subsubsection{Lagrangian Dynamic Model}
-In the study \cite{Yu2006} a Lagrangian model and control system was developed for a hybrid machine system (constant speed motor with servo motor) with a five bar linkage end effector. 
+Virtual model control is a control method that uses virtual components to create virtual forces when they interact with a real kinematic robotic model.\cite{Pratt2001} The virtual components take the form of springs, dampers, and any other mechanical device that alters the dynamics of a robots movement in some way, or any combination of the above. 
+
+The virtual model topology is defined in the mathematical sense on a very high level and the expected motion is related to the kinematic model and applied to the robotic model using whatever means of actuation exist. 
+
+In the case of Baleka two virtual model topologies were designed and implemented, the full-leg spring-damper virtual model in \cref{fig:Leg spring-damper virtual model} and the joint spring-damper model in \cref{fig:Joint spring-damper virtual model}. These two topologies were adapted for the Baleka kinematics from \cite{Kalouche2016}. 
+
+Two adaptations to the virtual model system in \cite{Kalouche2016} were made:
+\begin{enumerate}
+\item A polar coordinate system was used for the virtual model topology rather than a Cartesian system.
+\item A virtual torsional spring was developed for the full-leg case. 
+\end{enumerate}
+
+Assuming a full-leg virtual model where the foot force is defined around the polar coordinate system, the resulting foot force vector would be decomposed into $r$ and $\theta$ components: 
+
+\begin{equation}
+F = [f_r\ f_{\theta}]^T
+\end{equation}
+
+By using the arc-length radian measure relation, $s = r \theta$, we can decompose the foot force into $r$ and $s$ components: 
+\begin{equation}
+F = [f_r\ f_{s}]^T
+\end{equation}
+
+Defining a generic spring-damper compliance model as derived in \cite{Kalouche2016}, we can theoretically place the virtual component on any axis or measurement we wish, provided that it can be determined using the existing kinematic equations and Jacobian. The generic compliance model used in Baleka is as follows:
+
+\begin{equation}
+f_a = k_s(a_{fbk} - a_{cmd}) + k_d(\dot{a}_{fbk} - \dot{a}_{cmd})
+\end{equation}
+
+where $K_s$ is the spring constant, $K_d$ is the damping constant, and $a$ and its derivatives are the axis or measurement in question.
+
+For full leg spring-damper control, the virtual component is placed on the polar coordinate of the end effector with respect to the robot body, as shown in \cref{fig:Leg spring-damper virtual model}. 
+
+Another possibility is to implement two torsional spring-dampers virtually defined around the motor positions. This will be referred to as the joint spring-damper virtual model as shown in \cref{fig:Joint spring-damper virtual model}.
+
+It must be noted that before using the unit of radians alongside meters, as in polar coordinates, the radian measure should be normalised to not overpower the radial spring-damper force component. This is further investigated in \cref{sec:Torsional Spring-damper}.
 
 \begin{figure}
 \centering
-\includegraphics[clip, trim=2cm 15cm 9cm 2cm, page = 1, width=0.8\textwidth]{images/geometry/leg-spring-damper} 
+\includegraphics[clip, trim=2cm 15cm 9cm 2cm, page = 1, width=0.5\textwidth]{images/geometry/leg-spring-damper} 
 \caption{Leg spring-damper virtual model.}
 \label{fig:Leg spring-damper virtual model}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[clip, trim=2cm 12cm 10cm 2cm, page = 1, width=0.8\textwidth]{images/geometry/joint-spring-damper} 
+\includegraphics[clip, trim=2cm 4cm 5cm 3cm, page = 1, width=0.4\textwidth]{images/geometry/joint-spring-damper} 
 \caption{Joint spring-damper virtual model.}
 \label{fig:Joint spring-damper virtual model}
 \end{figure}
 
 \section{Spring-damper Mass Motion}
 \label{sec:Spring-damper Mass Motion}
+
+After determining the topology of the spring-damper virtual model, it is necessary to define and develop the commonly used spring-damper mass motion model and apply it to the specific case of the Baleka leg.
+
 Using Newton's second law, the downward force of a mass under acceleration is:
 \begin{equation}
 F_m = ma = m\ddot{x}
@@ -53,6 +87,8 @@ By setting $x(t) = Ae^{\lambda t}$, the roots of the ODE above are:
 \end{equation}
 
 \subsubsection{Critical Damping}
+In \cref{eq:spring-damper-roots} the zero origin crossing defines a critically damped system, and can be defined as follows:
+
 \begin{equation}
 \begin{aligned}
 &c^2 - 4mk = 0 \\
@@ -61,7 +97,10 @@ By setting $x(t) = Ae^{\lambda t}$, the roots of the ODE above are:
 \end{equation}
 
 \subsubsection{Damping Ratio}
-\begin{equation}
+
+The damping ratio is the ratio of the implemented damping constant to the critical damping constant, and can be defined as follows:
+
+\begin{equation} \label{eq:damping-ratio}
 \zeta = \frac{c}{c_{critical}}
 \end{equation}
 The equation \cref{eq:spring-damper-roots} can be restated in terms of the damping ratio as follows:
@@ -77,7 +116,7 @@ For the spring-damper system to be under, over or critically damped, the followi
 \item Critical: $\zeta = 1$
 \end{itemize}
 
-For the robotic leg, ideally we want an under damped system when landing - this ensures some of the shock of landing is dissipated by the spring damper oscillations.
+For the robotic leg, ideally we want an under damped system when landing - this ensures some of the shock of landing is dissipated by the spring damper oscillations. If the system is critically damped the leg mechanics will experience a lot of stress and the motor drivers are unlikely to be able to supply the current needed.
 
 \subsubsection{Experimental Damping}
 Experimentally the damping ratio $\zeta$ can be determined using the logarithmic decrement calculation. The logarithmic decrement is found by taking the natural logarithm of the ratio of amplitudes of two waveform peaks - this is then equated as follows:
@@ -89,9 +128,11 @@ Experimentally the damping ratio $\zeta$ can be determined using the logarithmic
 \end{equation}
 where $n = b-a$ determines the number of peaks between measurements.
 
+This equation was used in testing, as in \cref{sec:Virtual Spring-damper Tests}, to determine the damping ratio of the system to validate the virtual model.
+
 \subsubsection{Natural Frequency}
-The natural frequency $\omega_0$ is the frequency the undamped system will oscillate at if given an initial $x$ offset and left to freely oscillate:
-\begin{equation}
+The natural frequency, $\omega_0$, is the frequency the undamped system will oscillate at if given an initial $x$ offset and left to freely oscillate:
+\begin{equation} \label{eq:natural-freq}
 \omega_0 = \sqrt{\frac{k}{m}}\ [rad/s]
 \end{equation}
 
@@ -102,7 +143,7 @@ The damped natural frequency is the same as above, but with the damping constant
 
 \begin{figure}
 \centering
-\includegraphics[clip, trim=2cm 20cm 13cm 2cm, page = 1, width=0.6\textwidth]{images/geometry/spring-damper-mass} 
+\includegraphics[clip, trim=2cm 20cm 13cm 2cm, page = 1, width=0.4\textwidth]{images/geometry/spring-damper-mass} 
 \caption{Spring-damper mass model.}
 \label{fig:Spring-damper mass model}
 \end{figure}
@@ -137,7 +178,7 @@ When the leg is dropped on the linear guide from its maximum height of $0.5\ m$ 
 \end{aligned}
 \end{equation}
 
-The spring-damper system should absorb all this energy with the leg depressed to a radial set-point of at most $0.3\ m$, to insure the body does not impact the ground. The majority of the impact energy will be absorbed as spring potential energy with the dynamics being changed slightly by the damper kinetic energy as seen in the spring-damper drop tests \cref{fig:spring-damper-tests}. The spring potential energy and damper kinetic energy are shown in \cref{eq:spring-damper-energy}.
+The spring-damper system should absorb all this energy with the leg depressed to a radial set-point of at most $0.3\ m$, to insure the body does not impact the ground. The majority of the impact energy will be absorbed as spring potential energy with the dynamics being changed slightly by the damper kinetic energy as seen in the spring-damper drop tests in \cref{fig:spring-damper-tests}. The spring potential energy and damper kinetic energy are shown in \cref{eq:spring-damper-energy}.
 \begin{equation} \label{eq:spring-damper-energy}
 \begin{aligned}
 &E_{ps} = \frac{1}{2}kx^2 \\
@@ -159,18 +200,4 @@ A theoretical value for the spring constant $k$ can be found by using conservati
 \end{aligned}
 \end{equation}
 
-\section{Virtual Compliance Model}
-
-The following force vector provides a constant angular force, $f_{theta}$:
-\begin{equation}
-F = [f_r\ f_{\theta}]^T
-\end{equation}
-
-by using $f_{s}$, a force related to the arc-length of a polar system, the relation $s = r \theta$ exists:
-\begin{equation}
-F = [f_r\ f_{s}]^T
-\end{equation}
-
-\begin{equation}
-f_a = k_s(a_{fbk} - a_{cmd}) + k_d(\dot{a}_{fbk} - \dot{a}_{cmd})
-\end{equation}
+This spring-constant choice was practically confirmed during the spring-damper drop tests of  \cref{sec:Drop Tests}.
